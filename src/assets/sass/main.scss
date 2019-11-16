@@ -1,0 +1,48 @@
+[class *= 'btn-'] {
+  display: inline-block;
+  line-height: 40rpx;
+  padding: 8rpx 20rpx;
+  font-size: 24rpx;
+  color: #fff;
+  &.btn-blue {
+    background-color: $color-blue;
+  }
+  &.btn-red {
+    background-color: $color-red;
+  }
+}
+
+.the-mask {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5)
+}
+
+.icon-loading{
+  margin-left: 10rpx;
+  display: inline-block;
+  height: 20rpx;
+  width: 20rpx;
+  border-radius: 100%;
+  border: 6rpx solid #999;
+  border-bottom-color: transparent;
+  vertical-align: middle;
+  -webkit-animation: rotate 0.75s linear infinite;
+  animation: rotate 0.75s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+      transform: rotate(0deg);
+  }
+  50% {
+      transform: rotate(180deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
