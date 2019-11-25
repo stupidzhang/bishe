@@ -3,19 +3,15 @@ module.exports = [{
   path: 'pages/home',
   name: 'home',
   config: {
-    navigationBarTitleText: '猫眼电影'
+    navigationBarTitleText: '植物识别'
     // 引入UI组件，后面会讲到
     // usingComponents: {
     //   'zan-button': '../dist/btn/index'
     // }
   }
-}, {
-  path: 'pages/cinema',
-  name: 'cinema',
-  config: {
-    navigationBarTitleText: '影院'
-  }
-}, {
+},
+
+ {
   path: 'pages/personal',
   name: 'personal',
   config: {

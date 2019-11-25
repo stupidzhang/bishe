@@ -11,7 +11,7 @@
             <p :class="['headerTab', {'cur': headerTab===2}]" @tap="switchTab(2)">待映</p>
           </div>
           <a class="height100 padding-left20 padding-right30 border-left1 flex-align-justify" @tap="$router.push('search')">
-            <i class="icon-search font-size8 bold color-red"></i>
+            <i class="icon-search font-size8 bold color-blue"></i>
           </a>
         </header>
         <film-list :mainList="mainList" :nodata="nodata"></film-list>
@@ -50,7 +50,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-$color-red: #f0423b;
+$color-blue: #55b1e8;
 .home {
   .headerTab {
     margin: 0 20rpx;
@@ -59,8 +59,8 @@ $color-red: #f0423b;
     color: #999;
     border-bottom: 2rpx solid transparent;
     &.cur {
-      color: $color-red;
-      border-color: $color-red;
+      color: $color-blue;
+      border-color: $color-blue;
     }
   }
 }

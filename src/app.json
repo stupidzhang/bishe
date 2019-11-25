@@ -2,27 +2,21 @@
   "cloud": true,
   "pages": [],
   "window": {
-    "navigationBarBackgroundColor": "#f0423b",
-    "navigationBarTitleText": "猫眼电影",
+    "navigationBarBackgroundColor": "#32Ae57",
+    "navigationBarTitleText": "植物识别",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#999999",
-    "selectedColor": "#f0423b",
+    "selectedColor": "#32Ae57",
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "list": [
         {
             "pagePath": "pages/home",
-            "text": "电影",
-            "iconPath": "/static/img/film.png",
-            "selectedIconPath": "/static/img/film_active.png"
-        },
-        {
-            "pagePath": "pages/cinema",
-            "text": "影院",
-            "iconPath": "/static/img/cinema.png",
-            "selectedIconPath": "/static/img/cinema_active.png"
+            "text": "识别",
+            "iconPath": "/static/img/plant.png",
+            "selectedIconPath": "/static/img/plant_active.png"
         },
         {
             "pagePath": "pages/personal",

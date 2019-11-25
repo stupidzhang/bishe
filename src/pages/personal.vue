@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="bgcolor-red color-white font-size12" style="height: 30vh">
+    <section class="bgcolor-green color-white font-size12" style="height: 30vh">
         <div v-if="isLogin" class="height100 flex-column flex-align-justify">
             <open-data type="userAvatarUrl" class="user-avatar"></open-data>
             <open-data type="userNickName" class="margin-top20"></open-data>
@@ -15,12 +15,21 @@
             <button open-type="getUserInfo" @getuserinfo="theGetUserInfo" class="width100 border-radius8 color-white" style="background-color: #32AE57">微信快捷登录</button>
         </div>
     </section>
+    <section v-else>
+        <div v-for="(item,index) in userdata" :key="index" class="myperson">
+            <ul class=" font-size10 margin-bottom35 margin-left20" ><li>{{item}}<img class="icon" src="../../static/img/plant.png"></li></ul></div>
+    </section>
   </div>
 </template>
 
 <script>
 import { getUserInfo } from '@/utils/business'
 export default {
+    data(){
+        return{
+            userdata:["我的收藏","搜索排行","联系我们"]
+        }
+    },
     computed: {
         isLogin() {
             return this.$store.getters.isLogin
@@ -48,5 +57,16 @@ export default {
     border-radius: 50%;
     font-size: 160rpx;
     border: 2rpx solid #fff;
+}
+.myperson{
+    border-bottom:1rpx solid grey;
+    opacity: 0.2;
+    height:80rpx;
+    line-height: 80rpx;
+}
+.icon{
+    height:40rpx;
+    width:40rpx;
+    margin-left:20rpx;
 }
 </style>

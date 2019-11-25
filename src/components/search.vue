@@ -87,7 +87,7 @@ export default {
   .operateBtn {
     width: 15%;
     text-align: center;
-    color: #f0423b;
+    color: #55b1e8;
   }
 }
 </style>
