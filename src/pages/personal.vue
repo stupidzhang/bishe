@@ -17,7 +17,7 @@
     </section>
     <section v-else>
         <div v-for="(item,index) in userdata" :key="index" class="myperson">
-            <ul class=" font-size10 margin-bottom35 margin-left20" ><li>{{item}}<img class="icon" src="../../static/img/plant.png"></li></ul></div>
+            <ul class=" font-size10 margin-bottom35 margin-left20" ><li @click="getApi">{{item}}<img class="icon" src="../../static/img/plant.png"></li></ul></div>
     </section>
   </div>
 </template>
@@ -38,6 +38,14 @@ export default {
     methods: {
         theGetUserInfo() {
             getUserInfo()
+        },
+        getApi(){
+              axios.get('localhost/plant').then((response) => {
+        console.log(response)
+      }).catch((err) => {
+        console.log(err)
+      })
+
         }
     }
 }

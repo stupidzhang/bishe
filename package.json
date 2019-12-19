@@ -2,7 +2,7 @@
   "name": "y",
   "version": "1.0.0",
   "description": "A Mpvue project",
-  "author": "陈雅凯 <chenyakai@zhuojianchina.com>",
+  "author": "zjy",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -17,8 +17,12 @@
     ]
   },
   "dependencies": {
+    "fs": "0.0.1-security",
     "mpvue": "1.0.18",
     "mpvue-router-patch": "^0.2.1",
+    "mysql": "^2.17.1",
+    "net": "^1.0.2",
+    "tls": "0.0.1",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4"
   },
@@ -45,7 +49,7 @@
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "eventsource-polyfill": "^0.9.6",
-    "express": "^4.16.3",
+    "express": "^4.17.1",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.11",
     "friendly-errors-webpack-plugin": "^1.7.0",

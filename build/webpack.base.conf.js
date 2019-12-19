@@ -50,7 +50,9 @@ module.exports = {
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
     mainFields: ['browser', 'module', 'main']
-  },
+  },node: {
+    fs:'empty'
+    },
   module: {
     rules: [
       // {
@@ -105,6 +107,7 @@ module.exports = {
         }
       }
     ]
+  ,
   },
   plugins: [
     new MpvueEntry(),
