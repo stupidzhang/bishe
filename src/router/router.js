@@ -29,7 +29,13 @@ module.exports = [{
   config: {
     navigationBarTitleText: '搜索'
   }
-}, {
+},  {
+  path: 'pages/details',
+  name: 'details',
+  config: {
+    navigationBarTitleText: '简介'
+  }
+},{
   path: 'pages/film_detail',
   name: 'film_detail',
   config: {

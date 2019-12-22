@@ -7,14 +7,19 @@
             {{curCity}}<i class="icon-uparrow rotate180 color-999"></i>
           </a>
           <div class="font-size2 bold flex-align">
-            <p :class="['headerTab', {'cur': headerTab===1}]" @tap="switchTab(1)">热映</p>
-            <p :class="['headerTab', {'cur': headerTab===2}]" @tap="switchTab(2)">待映</p>
+            <p :class="['headerTab', {'cur': headerTab===1}]" @tap="switchTab(1)">当前</p>
+            <p :class="['headerTab', {'cur': headerTab===2}]" @tap="switchTab(2)">已搜索</p>
           </div>
           <a class="height100 padding-left20 padding-right30 border-left1 flex-align-justify" @tap="$router.push('search')">
             <i class="icon-search font-size8 bold color-blue"></i>
           </a>
         </header>
-        <film-list :mainList="mainList" :nodata="nodata"></film-list>
+        <div v-if="headerTab===1">
+          <div></div>
+          <div ><img :src="img" class="img-plant" @click="open"/></div>
+
+        </div>
+        <film-list v-if="headerTab===2" :mainList="mainList" :nodata="nodata"></film-list>
       </scroll-view>
     </main>
   </div>
@@ -30,6 +35,7 @@ export default {
   data() {
     return {
       headerTab: 1,
+      img:require('@/assets/images/icon/camera.png')
     }
   },
   computed: {
@@ -38,13 +44,29 @@ export default {
     }
   },
   onLoad() {
-    Object.assign(this, this.$options.data())
-    this.getList({isRefresh: true})
+    
   },
   methods: {
     switchTab(v) {
+      Object.assign(this, this.$options.data())
       this.headerTab = v
-      this.headerTab === 2 ? this.getList({isRefresh: true, isShow: 0}) : this.getList({isRefresh: true})
+      if(this.headerTab === 2 ){this.getList({isRefresh: true})}else{
+        return
+      }
+      
+    },
+    open(){
+      wx.chooseImage({
+  count: 1,
+  sizeType: ['original', 'compressed'],
+  sourceType: ['album', 'camera'],
+  success (res) {
+    // tempFilePath可以作为img标签的src属性显示图片
+    const tempFilePaths = res.tempFilePaths
+  }
+});
+this.$router.push({
+            path: 'details',})
     },
   }
 }
@@ -62,6 +84,12 @@ $color-blue: #55b1e8;
       color: $color-blue;
       border-color: $color-blue;
     }
+  }.img-plant{
+    width:155rpx;
+    height:155rpx;
+    position: absolute;;
+    bottom:80rpx;
+    left:320rpx;
   }
 }
 </style>

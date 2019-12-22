@@ -6,11 +6,11 @@ import * as types from '@/store/mutation_types'
 import util from '@/utils'
 import '@/assets/iconfont/iconfont.css'
 import '@/assets/sass/sass_index.scss'
-// import Axios from 'axios'
-// import VueAxios from 'vue-axios'
-// import AV from 'leancloud-storage'
-// Vue.use(AV);
-// Vue.use({ Axios, VueAxios});
+import axios from 'axios';
+Vue.prototype.$axios = axios;
+import WXrequest from './utils/recoginize.js'
+Vue.prototype.$wxhttp= WXrequest
+
 
 Vue.config.productionTip = false
 Vue.use(MpvueRouterPatch)

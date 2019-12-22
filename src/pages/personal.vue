@@ -17,17 +17,26 @@
     </section>
     <section v-else>
         <div v-for="(item,index) in userdata" :key="index" class="myperson">
-            <ul class=" font-size10 margin-bottom35 margin-left20" ><li @click="getApi">{{item}}<img class="icon" src="../../static/img/plant.png"></li></ul></div>
+            <ul class=" font-size10 margin-bottom35 margin-left20" ><li @click="getApi">{{item.name}}<img class="icon" :src="item.icon"></li></ul></div>
     </section>
   </div>
 </template>
 
 <script>
 import { getUserInfo } from '@/utils/business'
+import icon1 from '@/assets/images/icon/plant.png'
+import icon2 from '@/assets/images/icon/heart-active.png'
+
 export default {
     data(){
         return{
-            userdata:["我的收藏","搜索排行","联系我们"]
+            userdata:[{name:'我的收藏',icon:icon2
+            },
+            {name:'附近的搜索',icon:icon1
+            },{name:'联系我们',icon:icon1
+            },
+            
+            ],
         }
     },
     computed: {
@@ -40,12 +49,13 @@ export default {
             getUserInfo()
         },
         getApi(){
-              axios.get('localhost/plant').then((response) => {
+            console.log("111")
+              this.$axios.get('/static/clouddatabase/films.json').then((response) => {
         console.log(response)
       }).catch((err) => {
         console.log(err)
       })
-
+  
         }
     }
 }
@@ -67,14 +77,17 @@ export default {
     border: 2rpx solid #fff;
 }
 .myperson{
-    border-bottom:1rpx solid grey;
-    opacity: 0.2;
+    border-bottom:1rpx solid #e2e2e2;
     height:80rpx;
     line-height: 80rpx;
+    margin-left:20rpx;
+ 
 }
 .icon{
-    height:40rpx;
-    width:40rpx;
-    margin-left:20rpx;
+    height:50rpx;
+    width:50rpx;
+    margin-right:20rpx;
+    float:right;
+    margin-top:10rpx;
 }
 </style>
