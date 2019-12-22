@@ -45,14 +45,17 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue': 'mpvue',
+      'axios':'axios/dist/axios',
       '@': resolve('src')
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
     mainFields: ['browser', 'module', 'main']
-  },node: {
-    fs:'empty'
-    },
+  },
+  // node: {
+  //   fs:'empty'
+  //   }
+    // ,
   module: {
     rules: [
       // {

@@ -33,7 +33,7 @@ export default {
             userdata:[{name:'我的收藏',icon:icon2
             },
             {name:'附近的搜索',icon:icon1
-            },{name:'联系我们',icon:icon1
+            },{name:'联系我们',icon:icon2
             },
             
             ],
@@ -49,13 +49,44 @@ export default {
             getUserInfo()
         },
         getApi(){
-            console.log("111")
-              this.$axios.get('/static/clouddatabase/films.json').then((response) => {
-        console.log(response)
-      }).catch((err) => {
-        console.log(err)
-      })
-  
+    //         console.log("111")
+    //           this.$axios.get('http://192.168.152.1:8081/static/clouddatabase/films.json').then((response) => {
+    //     console.log(response)
+    //   }).catch((err) => {
+    //     console.log(err)
+    //   })
+  
+
+
+
+
+
+var qs = require('querystring');
+    const param = qs.stringify({
+    'grant_type': 'client_credentials',
+    'client_id': 'iiSMXGQk0KvLx3leMiSQTq7L',
+    'client_secret': 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
+});
+this.$wxhttp.post(
+    {
+        url: '/oauth/2.0/token?' + param,
+        agent: false
+    },
+    function (res) {
+        // 在标准输出中查看运行结果
+       console.log(res)
+    }
+);
+//    this.$wxhttp.post({
+//       url: '/token?'+param,
+//       data: {
+//         'appid': 'wx4ee8079852e7d6bf',
+//       }
+//     }).then(res => {
+//       console.log(res)
+//     })
+
+
         }
     }
 }
