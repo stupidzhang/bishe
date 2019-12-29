@@ -4,20 +4,25 @@
       <scroll-view scroll-y style="height: 100%;" @scrolltolower="loadMore">
         <header class="border-bottom1 flex-align-spacebetween" style="height: 80rpx">
           <a class="flex-align paddingX20" @tap="$router.push('/pages/select_city')">
-            {{curCity}}<i class="icon-uparrow rotate180 color-999"></i>
+            {{curCity}}
+            <i class="icon-uparrow rotate180 color-999"></i>
           </a>
           <div class="font-size2 bold flex-align">
             <p :class="['headerTab', {'cur': headerTab===1}]" @tap="switchTab(1)">当前</p>
             <p :class="['headerTab', {'cur': headerTab===2}]" @tap="switchTab(2)">已搜索</p>
           </div>
-          <a class="height100 padding-left20 padding-right30 border-left1 flex-align-justify" @tap="$router.push('search')">
+          <a
+            class="height100 padding-left20 padding-right30 border-left1 flex-align-justify"
+            @tap="$router.push('search')"
+          >
             <i class="icon-search font-size8 bold color-blue"></i>
           </a>
         </header>
         <div v-if="headerTab===1">
           <div></div>
-          <div ><img :src="img" class="img-plant" @click="open"/></div>
-
+          <div>
+            <img :src="img" class="img-plant" @click="open" />
+          </div>
         </div>
         <film-list v-if="headerTab===2" :mainList="mainList" :nodata="nodata"></film-list>
       </scroll-view>
@@ -26,48 +31,54 @@
 </template>
 <script>
 import filmList from '@/components/film_list'
-import {FILM_LIST} from '@/mixin'
+import { FILM_LIST } from '@/mixin'
 export default {
   mixins: [FILM_LIST],
   components: {
     filmList
   },
-  data() {
+  data () {
     return {
       headerTab: 1,
-      img:require('@/assets/images/icon/camera.png')
+      img: require('@/assets/images/icon/camera.png'),
+      filePaths: ''
     }
   },
   computed: {
-    curCity() {
+    curCity () {
       return this.$store.state.city
     }
   },
-  onLoad() {
-    
-  },
+  onLoad () {},
   methods: {
-    switchTab(v) {
+    switchTab (v) {
       Object.assign(this, this.$options.data())
       this.headerTab = v
-      if(this.headerTab === 2 ){this.getList({isRefresh: true})}else{
-        return
+      if (this.headerTab === 2) {
+        this.getList({ isRefresh: true })
+      } else {
+
       }
-      
     },
-    open(){
+    open () {
+      const that = this
       wx.chooseImage({
-  count: 1,
-  sizeType: ['original', 'compressed'],
-  sourceType: ['album', 'camera'],
-  success (res) {
-    // tempFilePath可以作为img标签的src属性显示图片
-    const tempFilePaths = res.tempFilePaths
-  }
-});
-this.$router.push({
-            path: 'details',})
-    },
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success (res) {
+          // tempFilePath可以作为img标签的src属性显示图片
+          const tempFilePaths = res.tempFilePaths
+          console.log(tempFilePaths)
+          that.$router.push({
+            path: 'details',
+            query: {
+              image: tempFilePaths
+            }
+          })
+        }
+      })
+    }
   }
 }
 </script>
@@ -84,12 +95,13 @@ $color-blue: #55b1e8;
       color: $color-blue;
       border-color: $color-blue;
     }
-  }.img-plant{
-    width:155rpx;
-    height:155rpx;
-    position: absolute;;
-    bottom:80rpx;
-    left:320rpx;
+  }
+  .img-plant {
+    width: 155rpx;
+    height: 155rpx;
+    position: absolute;
+    bottom: 80rpx;
+    left: 320rpx;
   }
 }
 </style>

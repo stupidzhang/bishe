@@ -26,69 +26,78 @@
 import { getUserInfo } from '@/utils/business'
 import icon1 from '@/assets/images/icon/plant.png'
 import icon2 from '@/assets/images/icon/heart-active.png'
+import img1 from '@/assets/images/icon/heart-active.png'
 
 export default {
-    data(){
-        return{
-            userdata:[{name:'我的收藏',icon:icon2
-            },
-            {name:'附近的搜索',icon:icon1
-            },{name:'联系我们',icon:icon2
-            },
-            
-            ],
-        }
+  data () {
+    return {
+      userdata: [{name: '我的收藏', icon: icon2
+      },
+      {name: '附近的搜索', icon: icon1
+      }, {name: '联系我们', icon: icon2
+      }
+
+      ]
+    }
+  },
+  computed: {
+    isLogin () {
+      return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    theGetUserInfo () {
+      getUserInfo()
     },
-    computed: {
-        isLogin() {
-            return this.$store.getters.isLogin
-        }
-    },
-    methods: {
-        theGetUserInfo() {
-            getUserInfo()
+    getApi () {
+      // var AipImageClassifyClient = require("baidu-aip-sdk").imageClassify;
+    //   console.log(require('baidu-aip-sdk'), '0000s')
+      var APP_ID = 'wx4ee8079852e7d6bf'
+      var API_KEY = 'iiSMXGQk0KvLx3leMiSQTq7L'
+      var SECRET_KEY = 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
+
+      // 新建一个对象，建议只保存一个对象调用服务接口
+      //   var client = new AipImageClassifyClient(APP_ID, API_KEY, SECRET_KEY)
+      var qs = require('querystring')
+      const param = qs.stringify({
+        'grant_type': 'client_credentials',
+        'client_id': 'iiSMXGQk0KvLx3leMiSQTq7L',
+        'client_secret': 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
+      })
+      this.$wxhttp.post(
+        {
+          url: '/oauth/2.0/token?' + param,
+          agent: false
         },
-        getApi(){
-    //         console.log("111")
-    //           this.$axios.get('http://192.168.152.1:8081/static/clouddatabase/films.json').then((response) => {
-    //     console.log(response)
-    //   }).catch((err) => {
-    //     console.log(err)
-    //   })
-  
-
-
-
-
-
-var qs = require('querystring');
-    const param = qs.stringify({
-    'grant_type': 'client_credentials',
-    'client_id': 'iiSMXGQk0KvLx3leMiSQTq7L',
-    'client_secret': 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
-});
-this.$wxhttp.post(
-    {
-        url: '/oauth/2.0/token?' + param,
-        agent: false
-    },
-    function (res) {
+        function (res) {
         // 在标准输出中查看运行结果
-       console.log(res)
-    }
-);
-//    this.$wxhttp.post({
-//       url: '/token?'+param,
-//       data: {
-//         'appid': 'wx4ee8079852e7d6bf',
-//       }
-//     }).then(res => {
-//       console.log(res)
-//     })
-
-
+          console.log(res)
         }
+      )
+      // var fs = require('fs');
+
+      // var image = img1.toString("base64");
+      // // 调用通用物体识别
+      // client.plantDetect(image).then(function(result) {
+      //     console.log(JSON.stringify(result));
+      // }).catch(function(err) {
+      //     // 如果发生网络错误
+      //     console.log(err);
+      // });
+
+      // 如果有可选参数
+      // var options = {};
+      // options["baike_num"] = "5";
+
+      // // 带参数调用通用物体识别
+      // client.plantDetect(image, options).then(function(result) {
+      //     console.log(JSON.stringify(result));
+      // }).catch(function(err) {
+      //     // 如果发生网络错误
+      //     console.log(err);
+      // });
     }
+  }
 }
 </script>
 <style scoped lang="scss">
