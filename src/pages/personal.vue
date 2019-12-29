@@ -26,8 +26,7 @@
 import { getUserInfo } from '@/utils/business'
 import icon1 from '@/assets/images/icon/plant.png'
 import icon2 from '@/assets/images/icon/heart-active.png'
-import img1 from '@/assets/images/icon/heart-active.png'
-
+// import img1 from '../../static/img/film.png'
 export default {
   data () {
     return {
@@ -37,7 +36,10 @@ export default {
       }, {name: '联系我们', icon: icon2
       }
 
-      ]
+      ],
+      token: '',
+      imgBase: '',
+      test: '1'
     }
   },
   computed: {
@@ -45,58 +47,71 @@ export default {
       return this.$store.getters.isLogin
     }
   },
+  mounted () {
+    console.log(this.token, this.imgBase, 'wai')
+  },
   methods: {
     theGetUserInfo () {
       getUserInfo()
-    },
-    getApi () {
-      // var AipImageClassifyClient = require("baidu-aip-sdk").imageClassify;
-    //   console.log(require('baidu-aip-sdk'), '0000s')
-      var APP_ID = 'wx4ee8079852e7d6bf'
-      var API_KEY = 'iiSMXGQk0KvLx3leMiSQTq7L'
-      var SECRET_KEY = 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
-
-      // 新建一个对象，建议只保存一个对象调用服务接口
-      //   var client = new AipImageClassifyClient(APP_ID, API_KEY, SECRET_KEY)
-      var qs = require('querystring')
-      const param = qs.stringify({
-        'grant_type': 'client_credentials',
-        'client_id': 'iiSMXGQk0KvLx3leMiSQTq7L',
-        'client_secret': 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
-      })
-      this.$wxhttp.post(
-        {
-          url: '/oauth/2.0/token?' + param,
-          agent: false
-        },
-        function (res) {
-        // 在标准输出中查看运行结果
-          console.log(res)
-        }
-      )
-      // var fs = require('fs');
-
-      // var image = img1.toString("base64");
-      // // 调用通用物体识别
-      // client.plantDetect(image).then(function(result) {
-      //     console.log(JSON.stringify(result));
-      // }).catch(function(err) {
-      //     // 如果发生网络错误
-      //     console.log(err);
-      // });
-
-      // 如果有可选参数
-      // var options = {};
-      // options["baike_num"] = "5";
-
-      // // 带参数调用通用物体识别
-      // client.plantDetect(image, options).then(function(result) {
-      //     console.log(JSON.stringify(result));
-      // }).catch(function(err) {
-      //     // 如果发生网络错误
-      //     console.log(err);
-      // });
     }
+    // base64 ({url, type}) {
+    //   return new Promise((resolve, reject) => {
+    //     wx.getFileSystemManager().readFile({
+    //       filePath: url, // 选择图片返回的相对路径
+    //       encoding: 'base64', // 编码格式
+    //       success: res => {
+    //         //   'data:image/' + type.toLocaleLowerCase() + ';base64,' +
+    //         resolve(res.data)
+
+    //         console.log(res, 'success')
+    //       },
+    //       fail: res => {
+    //         reject(res.errMsg)
+    //         console.log(res.errMsg, 'fail')
+    //       }
+    //     })
+    //   })
+    // },
+
+    // getApi () {
+    //   var qs = require('querystring')
+    //   const param = qs.stringify({
+    //     'grant_type': 'client_credentials',
+    //     'client_id': 'iiSMXGQk0KvLx3leMiSQTq7L',
+    //     'client_secret': 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
+    //   })
+    //   this.$wxhttp.post(
+    //     {
+    //       url: '/oauth/2.0/token?' + param,
+    //       agent: false
+    //     }
+    //   ).then(res => {
+    //     this.token = JSON.stringify(res.access_token)
+    //     console.log(this.token, 'li')
+    //   })
+
+    //   this.base64({
+    //     url: img1,
+    //     type: 'png'
+    //   }).then(res => {
+    //     this.imgBase = res
+    //     console.log('ljlj', this.imgBase, 'ddd', res)// res是base64路径
+    //   })
+
+    //   const param2 = qs.stringify({
+    //     'access_token': this.token,
+    //     // '24.792949228fc0e1fc90cee6394dfa7882.2592000.1580200418.282335-17735891',
+    //     'image': this.imgBase
+
+    //   })
+    //   this.$wxhttp.post(
+    //     {
+    //       url: '/rest/2.0/image-classify/v1/plant?' + param2
+    //     }
+    //   ).then(res => {
+    //     console.log(res)
+    //   })
+    // }
   }
 }
 </script>

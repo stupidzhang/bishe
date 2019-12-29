@@ -11,36 +11,36 @@
 <script>
 export default {
   props: ['placeholder'],
-  data() {
+  data () {
     return {
       keyword: '',
       isChanged: false
     }
   },
   computed: {
-    operateText() {
+    operateText () {
       return this.keyword ? '搜索' : '取消'
     }
   },
   watch: {
-    keyword(val, oldVal) {
-      if(this.$util.removeSpace(val) !== this.$util.removeSpace(oldVal)) {
+    keyword (val, oldVal) {
+      if (this.$util.removeSpace(val) !== this.$util.removeSpace(oldVal)) {
         this.isChanged = true
       }
     }
   },
-  onLoad() {
+  onLoad () {
     Object.assign(this, this.$options.data())
   },
   methods: {
     // 监听搜索框变化
-    input(e) {
+    input (e) {
       this.keyword = e.mp.detail.value
     },
     // 执行搜索
-    goSearch() {
-      if(this.keyword) {
-        if(this.isChanged) {
+    goSearch () {
+      if (this.keyword) {
+        if (this.isChanged) {
           this.$emit('goSearch', this.$util.removeSpace(this.keyword))
         }
       } else {
@@ -49,7 +49,7 @@ export default {
       this.isChanged = false
     },
     // 清空搜索框
-    clearInput() {
+    clearInput () {
       this.keyword = ''
       this.$emit('goSearch', this.keyword)
     }
