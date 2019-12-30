@@ -54,42 +54,41 @@ export default {
         }
       ).then(res => {
         this.token = res.access_token
-        console.log(this, 'li')
       })
-      //   console.log(this.token, this.img, 'wat')
       this.base64({
         url: this.img
         // type: 'png'
       }).then(res => {
         this.imgBase = res
-        // res是base64路径
-        const param2 = qs.stringify({
-          'access_token':
-          //   this.token,
-          '24.792949228fc0e1fc90cee6394dfa7882.2592000.1580200418.282335-17735891',
-          'image': encodeURI(res),
-          'baike_num': 1
-
-        })
-        console.log(this.$wxhttp, '---')
-        const that = this
-        wx.request({
-          url: 'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' + param2,
-
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
-          success: function (res) {
-            that.result = res.data.result
-            console.log(res, that.result)
-          }
-        }).then(res => {
-          that.result = res.result
-          console.log(that.result, '22')
-        })
+        this.getPlant(res)
       })
-      console.log('ljlj', this.imgBase, 'ddd')
+    },
+    getPlant (url) {
+      var qs = require('querystring')
+      const param2 = qs.stringify({
+        'access_token':
+        // this.token
+          '24.792949228fc0e1fc90cee6394dfa7882.2592000.1580200418.282335-17735891'
+
+      })
+
+      const that = this
+      wx.request({
+        url: 'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' + param2,
+        data: { 'image': url,
+          'baike_num': 1},
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        success: function (res) {
+          that.result = res.data.result
+          console.log(res, that.result)
+        }
+      }).then(res => {
+        that.result = res.result
+        console.log(that.result, '22')
+      })
     }
   }
 }
