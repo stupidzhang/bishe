@@ -1,10 +1,19 @@
 <template>
     <div>
         <div class="text-align-center font-size12 margin-top30" >介绍</div>
-        <div class="text-align-center margin-top30" v-for="(item,index) in result" :key="index">{{item.name}}<div>{{item.score}}</div></div>
+        <div class="text-align-center margin-top30" >{{plant.name}}
+         <ul>
+            <!-- <li>{{plant.baike_info}}</li> -->
+        <!-- <li><img :src="plant.baike_info.image_url"  class="other-plant" /></li> -->
+        </ul></div>
         <div class=" text-align-center margin-bototm60">
         <img :src="img" class="plant">
         </div>
+        <div>也可能是他们</div>
+        <ul class="margin-top30 flex" v-for="(item,index) in data1" :key="index"><li>{{item.name}}
+        <li><img :src="item.baike_info.image_url"  class="other-plant" /></li>
+        <li>匹配率： {{item.score}}</li>
+        </ul>
     </div>
 </template>
 <script>
@@ -14,22 +23,25 @@ export default {
       img: '',
       token: '',
       imgBase: '',
-      result: []
+      data1: [],
+      plant: []
     }
+  },
+  created () {
   },
   mounted () {
     this.img = this.$route.query.image
     this.getApi()
+    console.log(this.data1, 'data1')
   },
 
   methods: {
     base64 ({url}) {
       return new Promise((resolve, reject) => {
         wx.getFileSystemManager().readFile({
-          filePath: url, // 选择图片返回的相对路径
-          encoding: 'base64', // 编码格式
+          filePath: url,
+          encoding: 'base64',
           success: res => {
-            //   'data:image/' + type.toLocaleLowerCase() + ';base64,' +
             resolve(res.data)
             console.log(res, 'success')
           },
@@ -47,20 +59,21 @@ export default {
         'client_id': 'iiSMXGQk0KvLx3leMiSQTq7L',
         'client_secret': 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
       })
-      this.$wxhttp.get(
-        {
-          url: '/oauth/2.0/token?' + param,
-          agent: false
-        }
-      ).then(res => {
-        this.token = res.access_token
-      })
-      this.base64({
-        url: this.img
-        // type: 'png'
-      }).then(res => {
-        this.imgBase = res
-        this.getPlant(res)
+      return new Promise((resolve, reject) => {
+        this.$wxhttp.get(
+          {
+            url: '/oauth/2.0/token?' + param,
+            agent: false
+          }
+        ).then(res => {
+          this.token = res.access_token
+        })
+        this.base64({
+          url: this.img
+        }).then(res => {
+          this.imgBase = res
+          this.getPlant(res)
+        })
       })
     },
     getPlant (url) {
@@ -68,27 +81,32 @@ export default {
       const param2 = qs.stringify({
         'access_token':
         // this.token
-          '24.792949228fc0e1fc90cee6394dfa7882.2592000.1580200418.282335-17735891'
+          '24.792949228fc0e1fc90cee6394dfa7882.2592000.1580200418.282335-17735891',
+        'baike_num': 5
 
       })
 
       const that = this
-      wx.request({
-        url: 'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' + param2,
-        data: { 'image': url,
-          'baike_num': 1},
-        header: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        method: 'POST',
-        success: function (res) {
-          that.result = res.data.result
-          console.log(res, that.result)
-        }
-      }).then(res => {
-        that.result = res.result
-        console.log(that.result, '22')
-      })
+      return new Promise((resolve, reject) => {
+        wx.request({
+          url: 'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' + param2,
+          data: { 'image': url
+          },
+          header: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          method: 'POST',
+          success: function (res) {
+            resolve(res.data.result)
+            that.data1 = res.data.result
+            that.plant = that.data1[0]
+            console.log(that.plant, that.data1[0])
+          }
+
+        })
+        console.log(this.plant, that.plant, this, 'wai')
+      }
+      )
     }
   }
 }
@@ -97,5 +115,10 @@ export default {
 .plant{
     width:200rpx;
     height:200rpx;
+}
+.other-plant{
+width:150rpx;
+height:150rpx;
+border-radius: 40rpx;
 }
 </style>
