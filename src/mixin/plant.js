@@ -1,7 +1,7 @@
-export const FILM_LIST = {
+export const PLANT_LIST = {
   data () {
     return {
-      mainList: [],
+      plantList: [],
       nodata: false,
       pageNo: 1,
       pageSize: 6,
@@ -15,12 +15,12 @@ export const FILM_LIST = {
       })
       if (isRefresh) {
         this.pageNo = 1
-        this.mainList = []
+        this.plantList = []
       } else {
         this.pageNo++
       }
       wx.cloud.callFunction({
-        name: 'films',
+        name: 'plant',
         data: {
           isShow: isShow,
           keyWord: keyWord,
@@ -30,8 +30,8 @@ export const FILM_LIST = {
       }).then(res => {
         console.log(res, 'resres')
         this.hasMore = !(res.result.data.length < this.pageSize)
-        this.mainList.push(...res.result.data)
-        this.nodata = this.$util.switchNodata(this.mainList)
+        this.plantList.push(...res.result.data)
+        this.nodata = this.$util.switchNodata(this.plantList)
         wx.hideLoading()
       })
     },

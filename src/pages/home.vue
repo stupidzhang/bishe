@@ -24,16 +24,16 @@
             <img :src="img" class="img-plant" @click="open" />
           </div>
         </div>
-        <film-list v-if="headerTab===2" :mainList="mainList" :nodata="nodata"></film-list>
+        <film-list v-if="headerTab===2" :mainList="plantList" :nodata="nodata"></film-list>
       </scroll-view>
     </main>
   </div>
 </template>
 <script>
 import filmList from '@/components/film_list'
-import { FILM_LIST } from '@/mixin'
+import { FILM_LIST, PLANT_LIST } from '@/mixin'
 export default {
-  mixins: [FILM_LIST],
+  mixins: [FILM_LIST, PLANT_LIST],
   components: {
     filmList
   },

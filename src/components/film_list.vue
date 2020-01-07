@@ -10,11 +10,11 @@
         <div class="width100 paddingX20">
           <div class="flex-align-spacebetween">
             <p class="flex-align" style="width: 65%">
-              <span class="color-333 font-size4 line-ellipsis">{{item.title}}</span>
+              <span class="color-333 font-size4 line-ellipsis">{{item.name}}</span>
               <span v-if="item.is3D" class="margin-left10 icon-3DIMAX itemflex-00auto"></span>
             </p>
             <p class="padding-left10 itemflex-00auto color-yellow" style="max-width: 35%">
-              <span v-if="item.expect">{{item.expect}}<span class="font-size-8">人想看</span></span>
+              <span v-if="item.expect">{{item.username}}<span class="font-size-8">人想看</span></span>
               <span v-else-if="item.score">{{item.score}}<span class="font-size-8">分</span></span>
               <span v-else class="font-size-4 color-999">暂无评分</span>
             </p>
@@ -34,8 +34,11 @@
 
 <script>
 export default {
+  mounted () {
+    console.log(this.mainList, '---')
+  },
   methods: {
-    clickItem(obj) {
+    clickItem (obj) {
       this.$router.push({
         path: 'film_detail',
         query: {
