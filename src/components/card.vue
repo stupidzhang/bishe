@@ -1,18 +1,15 @@
 <template>
   <div class="item">
     <div class="card">
-      <!-- banner图片 -->
       <div class="img_wrap">
         <image class="item_image" :src="data.coverImg" />
       </div>
-      <!-- 内容区域 -->
       <div class="cont_wrap">
-        <!-- 标题 -->
         <div class="title_wrap">
           <div class="title">{{ data.title }}</div>
         </div>
-        <!-- 描述 -->
         <div class="desc">{{ data.desc }}</div>
+        <div class="cancel" @click="cancelFavor">取消收藏</div>
       </div>
     </div>
   </div>
@@ -23,6 +20,11 @@ export default {
     data: {
       type: Object
     }
+  },
+  methods: {
+    cancelFavor () {
+      this.$emit('cancel')
+    }
   }
 }
 </script>
@@ -30,10 +32,16 @@ export default {
 .item {
   height: 100%;
   position: relative;
+  .cancel {
+    font-size: 25rpx;
+    color: #b99c6d;
+    float: right;
+    margin-right: 40rpx;
+  }
   .card {
     position: absolute;
     width: 625rpx;
-    height: 811rpx;
+    height: 1011rpx;
     background: #fff;
     border-radius: 7rpx;
     top: 50rpx;
@@ -51,7 +59,7 @@ export default {
   .item_image {
     display: block;
     width: 100%;
-    height: 399rpx;
+    height: 599rpx;
     border-radius: 7rpx 7rpx 0 0;
     z-index: 5;
     opacity: 0.7;

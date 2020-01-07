@@ -14,11 +14,20 @@
             :animation="index == curIndex ? animationData : animationData2"
           >
             <!-- 卡片项，写在子组件中 -->
-            <Card :data="item" />
+            <Card :data="item" @cancel="cancel(item, index)" />
           </div>
         </swiper-item>
       </block>
     </swiper>
+    <div class="swiper_dot_wrap">
+      <ul>
+        <li
+          v-for="(item, index) in datalist"
+          :key="index"
+          :class="{ active: curIndex === index }"
+        ></li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -38,14 +47,14 @@ export default {
         },
         {
           coverImg:
-            'https://lh3.googleusercontent.com/IU9_NYevRO-fFjiH_hhjuxTOuDhG3cmMCWNOlnz2TBoG9jICiZevHGC0eJmvsrUwUAtbeFc=s128',
+            'http://n.sinaimg.cn/sinacn20118/201/w1080h721/20190119/3311-hrvcwnk7953342.jpg',
           title: '安纳托利亚往事',
           desc:
             '摩尔曼斯克2，北极圈内最大的城市，离芬兰也就半小时车程，整个城市才从极夜的天气中浮上来，太阳还未能升出地平线，城市只能靠云层的反射借光，一天只有几个小时的光亮，但红霞会持续一整天时间。'
         },
         {
           coverImg:
-            'https://lh3.googleusercontent.com/xNHcyfvW2wbnSHzp9ldizNUoqhwpumx0j3QdnOlrOPH6gj4yWDif1mnaBtezpjMe9_AUKIc=s128',
+            'http://n.sinaimg.cn/sinacn20118/201/w1080h721/20190119/3311-hrvcwnk7953342.jpg',
           title: '圣彼得堡是另一个阿姆斯特丹',
           desc:
             '摩尔曼斯克3，北极圈内最大的城市，离芬兰也就半小时车程，整个城市才从极夜的天气中浮上来，太阳还未能升出地平线，城市只能靠云层的反射借光，一天只有几个小时的光亮，但红霞会持续一整天时间。'
@@ -62,6 +71,9 @@ export default {
     Card
   },
   methods: {
+    cancel (item, index) {
+      console.log(item, index, '取消收藏')
+    },
     handleChange (e) {
       this.curIndex = e.mp.detail.current
       this.changeActive()
@@ -102,7 +114,10 @@ export default {
   //   margin-top: 20rpx;
   position: relative;
   width: 100%;
-  height: 876rpx !important;
+  height: 1076rpx !important;
+  background: #303030;
+}
+.personal {
   background: #303030;
 }
 .item {
@@ -116,9 +131,9 @@ export default {
 }
 // 指示点
 .swiper_dot_wrap {
-  position: absolute;
-  top: 106rpx;
-  right: 65rpx;
+  position: relative;
+  top: 66rpx;
+  left: 30%;
   width: 200rpx;
   height: 15rpx;
   ul {
