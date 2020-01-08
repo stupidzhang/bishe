@@ -14,18 +14,10 @@
               <span v-if="item.is3D" class="margin-left10 icon-3DIMAX itemflex-00auto"></span>
             </p>
             <p class="padding-left10 itemflex-00auto color-yellow" style="max-width: 35%">
-              <span v-if="item.expect">{{item.username}}<span class="font-size-8">人想看</span></span>
-              <span v-else-if="item.score">{{item.score}}<span class="font-size-8">分</span></span>
-              <span v-else class="font-size-4 color-999">暂无评分</span>
+            <span>{{item.city}}</span>
             </p>
           </div>
-          <div class="margin-top10 color-666 line-ellipsis">{{item.type}}</div>
-          <div class="width100 color-666 flex-align-spacebetween">
-            <p class="line-limited1 width75">{{item.actor}}</p>
-            <button v-if="item.isShow" class="itemflex-00auto btn-red marginX0">购票</button>
-            <button v-else class="itemflex-00auto btn-blue marginX0">预售</button>
-          </div>
-          <div class="color-999 line-ellipsis">今天{{item.cinema}}家影院放映{{item.field}}场</div>
+          <div class="color-999 line-ellipsis">description:{{item.description}}</div>
         </div>
       </li>
     </ul>

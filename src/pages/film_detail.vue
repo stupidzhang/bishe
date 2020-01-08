@@ -51,18 +51,18 @@
 <script>
 import { getUserInfo } from '@/utils/business'
 export default {
-  data() {
+  data () {
     return {
       item: {}
     }
   },
-  onLoad() {
+  onLoad () {
     this.item = JSON.parse(decodeURIComponent(this.$route.query.film))
   },
   methods: {
-    theGetUserInfo() {
+    theGetUserInfo () {
       new Promise(resolve => {
-        if(!this.$store.getters.isLogin) {
+        if (!this.$store.getters.isLogin) {
           getUserInfo().then(() => {
             resolve()
           }, () => {
