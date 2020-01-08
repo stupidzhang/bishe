@@ -3,10 +3,15 @@ const cloud = require('wx-server-sdk')
 cloud.init()
 const db = cloud.database()
 exports.main = async (event, context) => {
+  console.log(event, context, 'eve')
   try {
-    return await db.collection('plantName').get()
+    return await db.collection('plantName').where({
+      name: db.RegExp({
+        regexp: event.keyWord || '.',
+        options: 'i'
+      })
+    }).skip((event.pageNo - 1) * event.pageSize).get()
   } catch (e) {
     console.error(e)
   }
-  // collection 上的 get 方法会返回一个 Promise，因此云函数会在数据库异步取完数据后返回结
 }

@@ -1,11 +1,11 @@
 <template>
   <div>
     <header class="fixed top0 width100 bgcolor-bg" style="height: 100rpx">
-      <search placeholder="请输入片名" @goSearch="goSearch"></search>
+      <search placeholder="请输入植物名" @goSearch="goSearch"></search>
     </header>
     <main class="fixed width100 bgcolor-white" style="top: 100rpx;height: calc(100% - 100rpx)">
       <scroll-view scroll-y style="height: 100%;" @scrolltolower="loadMore">
-        <film-list :mainList="mainList" :nodata="nodata"></film-list>
+        <film-list :mainList="plantList" :nodata="nodata"></film-list>
       </scroll-view>
     </main>
   </div>
@@ -13,18 +13,19 @@
 <script>
 import search from '@/components/search'
 import filmList from '@/components/film_list'
-import {FILM_LIST} from '@/mixin'
+import {PLANT_LIST} from '@/mixin'
 export default {
-  mixins: [FILM_LIST],
+  mixins: [PLANT_LIST],
   components: {
     search,
     filmList
   },
-  onLoad() {
+  onLoad () {
     Object.assign(this, this.$options.data())
   },
   methods: {
-    goSearch(v) {
+    goSearch (v) {
+      console.log(v, 'key')
       this.getList({isRefresh: true, keyWord: v})
     }
   }

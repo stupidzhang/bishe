@@ -23,14 +23,13 @@ export const PLANT_LIST = {
         .callFunction({
           name: 'plantName',
           data: {
-            // isShow: isShow,
-            // keyWord: keyWord,
-            // pageNo: this.pageNo,
-            // pageSize: this.pageSize
+            keyWord: keyWord,
+            pageNo: this.pageNo,
+            pageSize: this.pageSize
           }
         })
         .then(res => {
-          console.log(res, 'resres')
+          console.log(res.result.data, 'res')
           this.hasMore = !(res.result.data.length < this.pageSize)
           this.plantList.push(...res.result.data)
           this.nodata = this.$util.switchNodata(this.plantList)
