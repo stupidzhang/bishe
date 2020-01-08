@@ -9,7 +9,7 @@ export const PLANT_LIST = {
     }
   },
   methods: {
-    getList ({isRefresh, isShow, keyWord = ''}) {
+    getList ({ isRefresh, isShow, keyWord = '' }) {
       wx.showLoading({
         title: '加载中'
       })
@@ -19,25 +19,27 @@ export const PLANT_LIST = {
       } else {
         this.pageNo++
       }
-      wx.cloud.callFunction({
-        name: 'plant',
-        data: {
-          isShow: isShow,
-          keyWord: keyWord,
-          pageNo: this.pageNo,
-          pageSize: this.pageSize
-        }
-      }).then(res => {
-        console.log(res, 'resres')
-        this.hasMore = !(res.result.data.length < this.pageSize)
-        this.plantList.push(...res.result.data)
-        this.nodata = this.$util.switchNodata(this.plantList)
-        wx.hideLoading()
-      })
+      wx.cloud
+        .callFunction({
+          name: 'plantName',
+          data: {
+            // isShow: isShow,
+            // keyWord: keyWord,
+            // pageNo: this.pageNo,
+            // pageSize: this.pageSize
+          }
+        })
+        .then(res => {
+          console.log(res, 'resres')
+          this.hasMore = !(res.result.data.length < this.pageSize)
+          this.plantList.push(...res.result.data)
+          this.nodata = this.$util.switchNodata(this.plantList)
+          wx.hideLoading()
+        })
     },
     loadMore () {
       if (this.hasMore) {
-        this.getList({isRefresh: false, keyWord: this.keyWord})
+        this.getList({ isRefresh: false, keyWord: this.keyWord })
       }
     }
   }
