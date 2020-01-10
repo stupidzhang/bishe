@@ -25,6 +25,7 @@
     "mysql": "^2.17.1",
     "net": "^1.0.2",
     "tls": "0.0.1",
+    "vant-weapp": "^0.5.27",
     "vue-axios": "^2.1.5",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4"

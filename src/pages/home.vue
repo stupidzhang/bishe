@@ -10,7 +10,7 @@
             class="flex-align paddingX20"
             @tap="$router.push('/pages/select_city')"
           >
-            {{ cityName }}
+            {{ curCity }}
             <i class="icon-uparrow rotate180 color-999"></i>
           </a>
           <div class="font-size2 bold flex-align">
@@ -62,15 +62,20 @@ export default {
       headerTab: 1,
       img: require('@/assets/images/icon/camera.png'),
       filePaths: '',
-      cityName: ''
+      cityName: '' // 接口获得的当前地理位置
     }
   },
-  computed: {},
+  computed: {
+    // 更改过或者当前地理位置
+    curCity () {
+      return this.$store.state.city
+    }
+  },
   onLoad () {
-    this.curCity()
+    this.getCity()
   },
   methods: {
-    curCity () {
+    getCity () {
       let scope = this
       wx.getLocation({
         type: 'wgs84',
@@ -94,9 +99,14 @@ export default {
             success: function (res) {
               if (res && res.data) {
                 console.log(res)
-                console.log(res.data.result.addressComponent.city)
                 scope.cityName = res.data.result.addressComponent.city
+                scope.cityName = scope.cityName.substring(
+                  0,
+                  scope.cityName.length - 1
+                )
+                scope.$store.commit(scope.$types.SET_CITY, scope.cityName)
               } else {
+                scope.$toast(res.result)
                 console.log('获取失败')
               }
             }

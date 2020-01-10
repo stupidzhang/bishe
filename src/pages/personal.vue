@@ -10,25 +10,38 @@
       </div>
     </section>
     <section v-if="!isLogin" class="the-mask">
-      <div class="fixed bottom0 left0 right0 paddingX40 bgcolor-white" style="height: 20vh">
+      <div
+        class="fixed bottom0 left0 right0 paddingX40 bgcolor-white"
+        style="height: 20vh"
+      >
         <p class="padding20X text-align-center color-999">请先登录</p>
         <button
           open-type="getUserInfo"
           @getuserinfo="theGetUserInfo"
           class="width100 border-radius8 color-white"
           style="background-color: #32AE57"
-        >微信快捷登录</button>
+        >
+          微信快捷登录
+        </button>
       </div>
     </section>
     <section v-else>
-      <div v-for="(item,index) in userdata" :key="index" class="myperson">
+      <!-- <div v-for="(item, index) in userdata" :key="index" class="myperson">
         <ul class="font-size10 margin-bottom35 margin-left20">
           <li @click="toPage(index)">
-            {{item.name}}
+            {{ item.name }}
             <img class="icon" :src="item.icon" />
           </li>
         </ul>
-      </div>
+      </div> -->
+      <van-grid :column-num="2">
+        <van-grid-item
+          v-for="(item, index) in userdata"
+          :key="index"
+          :icon="item.icon"
+          :text="item.name"
+        />
+      </van-grid>
     </section>
   </div>
 </template>

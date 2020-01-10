@@ -4,11 +4,11 @@ module.exports = [
     path: 'pages/home',
     name: 'home',
     config: {
-      navigationBarTitleText: '植物识别'
+      navigationBarTitleText: '植物识别',
       // 引入UI组件，后面会讲到
-      // usingComponents: {
-      //   'zan-button': '../dist/btn/index'
-      // }
+      usingComponents: {
+        'van-button': '../../static/dist/button/index'
+      }
     }
   },
 
@@ -44,7 +44,11 @@ module.exports = [
     path: 'pages/favorite',
     name: 'favorite',
     config: {
-      navigationBarTitleText: '我的收藏'
+      navigationBarTitleText: '我的收藏',
+      usingComponents: {
+        'van-grid': '../../static/dist/grid/index',
+        'van-grid-item': '../../static/dist/grid-item/index'
+      }
     }
   },
   {

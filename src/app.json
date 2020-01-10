@@ -6,6 +6,11 @@
     "navigationBarTitleText": "植物识别",
     "navigationBarTextStyle": "white"
   },
+  "usingComponents": {
+    "van-button": "../static/dist/button/index",
+    "van-grid": "../static/dist/grid/index",
+    "van-grid-item": "../static/dist/grid-item/index"
+  },
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
