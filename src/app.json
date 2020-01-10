@@ -6,24 +6,31 @@
     "navigationBarTitleText": "植物识别",
     "navigationBarTextStyle": "white"
   },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "tabBar": {
     "color": "#999999",
     "selectedColor": "#32Ae57",
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "list": [
-        {
-            "pagePath": "pages/home",
-            "text": "识别",
-            "iconPath": "/static/img/plant.png",
-            "selectedIconPath": "/static/img/plant_active.png"
-        },
-        {
-            "pagePath": "pages/personal",
-            "text": "我的",
-            "iconPath": "/static/img/personal.png",
-            "selectedIconPath": "/static/img/personal_active.png"
-        }
+      {
+        "pagePath": "pages/home",
+
+        "requiredBackgroundModes": ["location"],
+        "text": "识别",
+        "iconPath": "/static/img/plant.png",
+        "selectedIconPath": "/static/img/plant_active.png"
+      },
+      {
+        "pagePath": "pages/personal",
+        "text": "我的",
+        "iconPath": "/static/img/personal.png",
+        "selectedIconPath": "/static/img/personal_active.png"
+      }
     ]
   }
 }
