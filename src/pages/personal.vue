@@ -26,20 +26,13 @@
       </div>
     </section>
     <section v-else>
-      <!-- <div v-for="(item, index) in userdata" :key="index" class="myperson">
-        <ul class="font-size10 margin-bottom35 margin-left20">
-          <li @click="toPage(index)">
-            {{ item.name }}
-            <img class="icon" :src="item.icon" />
-          </li>
-        </ul>
-      </div> -->
       <van-grid :column-num="2">
         <van-grid-item
           v-for="(item, index) in userdata"
           :key="index"
           :icon="item.icon"
           :text="item.name"
+          @click="toPage(index)"
         />
       </van-grid>
     </section>
@@ -47,9 +40,9 @@
 </template>
 
 <script>
-import { getUserInfo } from '@/utils/business';
-import icon1 from '@/assets/images/icon/plant.png';
-import icon2 from '@/assets/images/icon/heart-active.png';
+import { getUserInfo } from '@/utils/business'
+import icon1 from '@/assets/images/icon/plant.png'
+import icon2 from '@/assets/images/icon/heart-active.png'
 // import img1 from '../../static/img/film.png'
 export default {
   data () {

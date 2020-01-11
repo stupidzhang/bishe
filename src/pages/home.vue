@@ -50,8 +50,8 @@
   </div>
 </template>
 <script>
-import filmList from '@/components/film_list';
-import { FILM_LIST, PLANT_LIST } from '@/mixin';
+import filmList from '@/components/film_list'
+import { FILM_LIST, PLANT_LIST } from '@/mixin'
 export default {
   mixins: [FILM_LIST, PLANT_LIST],
   components: {
@@ -82,9 +82,7 @@ export default {
         success (res) {
           const latitude = res.latitude
           const longitude = res.longitude
-          console.log('-d---------------------')
           console.log(res)
-
           wx.request({
             url:
               'http://api.map.baidu.com/reverse_geocoding/v3/?ak=e4KKWmaYLZLG9hTBaVMpSvxoOIAMcGe9&output=json&coordtype=wgs84ll&location=' +

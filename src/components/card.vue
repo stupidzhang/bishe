@@ -2,11 +2,11 @@
   <div class="item">
     <div class="card">
       <div class="img_wrap">
-        <image class="item_image" :src="data.coverImg" />
+        <image class="item_image" :src="data.imgSrc" />
       </div>
       <div class="cont_wrap">
         <div class="title_wrap">
-          <div class="title">{{ data.title }}</div>
+          <div class="title">{{ data.name }}</div>
         </div>
         <div class="desc">{{ data.desc }}</div>
         <div class="cancel" @click="cancelFavor">取消收藏</div>
@@ -20,6 +20,9 @@ export default {
     data: {
       type: Object
     }
+  },
+  onLoad () {
+    console.log(this.data, 'fff')
   },
   methods: {
     cancelFavor () {

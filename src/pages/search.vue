@@ -13,9 +13,9 @@
 <script>
 import search from '@/components/search'
 import filmList from '@/components/film_list'
-import {PLANT_LIST} from '@/mixin'
+import {PLANT_LIST, FILM_LIST} from '@/mixin'
 export default {
-  mixins: [PLANT_LIST],
+  mixins: [PLANT_LIST, FILM_LIST],
   components: {
     search,
     filmList
