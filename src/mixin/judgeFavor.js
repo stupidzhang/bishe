@@ -1,7 +1,7 @@
-export const FAVOR_LIST = {
+export const JUDGEFAVOR_LIST = {
   data () {
     return {
-      favorList: [],
+      judgeFavorList: [],
       nodata: false,
       pageNo: 1,
       pageSize: 6,
@@ -9,36 +9,34 @@ export const FAVOR_LIST = {
     }
   },
   methods: {
-    getList ({ isRefresh, isShow, keyWord = '' }) {
+    judgeList ({ isRefresh, isShow, keyWord = '' }) {
       wx.showLoading({
         title: '加载中'
       })
       if (isRefresh) {
         this.pageNo = 1
-        this.favorList = []
+        this.judgeFavorList = []
       } else {
         this.pageNo++
       }
       wx.cloud
         .callFunction({
-          name: 'favor',
+          name: 'judgeFavor',
           data: {
             keyWord: keyWord
-            // pageNo: this.pageNo,
-            // pageSize: this.pageSize
           }
         })
         .then(res => {
           console.log(res.result.data, 'res')
           this.hasMore = !(res.result.data.length < this.pageSize)
-          this.favorList.push(...res.result.data)
-          this.nodata = this.$util.switchNodata(this.favorList)
+          this.judgeFavorList.push(...res.result.data)
+          this.nodata = this.$util.switchNodata(this.judgeFavorList)
           wx.hideLoading()
         })
     },
     loadMore () {
       if (this.hasMore) {
-        this.getList({isRefresh: false, keyWord: this.keyWord})
+        this.judgeList({isRefresh: false, keyWord: this.keyWord})
       }
     }
   }

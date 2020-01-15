@@ -57,7 +57,7 @@ export default {
           icon: icon1
         },
         {
-          name: '联系我们',
+          name: '给我评分',
           icon: icon2
         }
       ],
@@ -72,7 +72,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.token, this.imgBase, 'wai')
   },
   methods: {
     theGetUserInfo () {
@@ -80,7 +79,7 @@ export default {
     },
     toPage (index) {
       console.log(index, 'dianiji')
-      if (index == 0) {
+      if (index === 0) {
         this.$router.push({
           path: 'favorite'
         })

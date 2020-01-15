@@ -6,7 +6,7 @@ exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
     return await db.collection('favor').where({
-    //   name: event.keyWord
+      name: event.keyWord
     }).get()
   } catch (e) {
     console.error(e)

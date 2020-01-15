@@ -1,10 +1,9 @@
 <template>
   <div>
     <div class="text-align-center font-size12 margin-top30">介绍</div>
-
     <ul class="paddingX40 line-height50 font-size4 text-align-center">
-      <li v-if="plantDes.description">
-        {{ plantDes.description }}<span>地域分布</span>
+      <li v-if="plantDes.description" class="content">
+        {{ plantDes.description }}<span class="font-size2 color-blue">地域分布</span>
       </li>
       <li v-else class="margin-top30">
         <div>{{ plant.name }}</div>
@@ -13,10 +12,16 @@
       <li><img :src="plantDes.image_url" class="plant" /></li>
     </ul>
     <div class=" text-align-center margin-bototm60">
-      <img :src="img" class="plant" /><img
+      <img :src="img" class="plant" />
+      <!-- <div   v-for="(item,index) in judgeFavorList"
+      :key="index"> -->
+      <img
+    
         class="icon"
         :src="isFavor ? iconActive : icon"
+        @click="showFavor"
       />
+      <!-- </div> -->
     </div>
     <div class=" text-align-center">也可能是他们</div>
     <div class="flex">
@@ -33,9 +38,11 @@
   </div>
 </template>
 <script>
-import icon from '../assets/images/icon/heart.png';
-import iconActive from '../assets/images/icon/heart-active.png';
+import icon from '../assets/images/icon/heart-empty.png'
+import iconActive from '../assets/images/icon/heart-active.png'
+import {JUDGEFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST} from '@/mixin'
 export default {
+  mixins: [JUDGEFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST],
   data () {
     return {
       img: '',
@@ -45,22 +52,18 @@ export default {
       plant: [],
       plantDes: '',
       icon,
-      iconActive
+      iconActive,
+      isFavor: false,
+      list: []
     }
   },
-  created () {},
-  computed: {
-    isFavor () {
-      // 接数据库判断
-      return false
-    }
-  },
-  mounted () {
+  onLoad () {
     this.img = this.$route.query.image
     this.getApi()
-    console.log(this.data1, 'data1')
   },
+  computed: {
 
+  },
   methods: {
     base64 ({ url }) {
       return new Promise((resolve, reject) => {
@@ -78,36 +81,35 @@ export default {
         })
       })
     },
-    getApi () {
+    async getApi () {
       var qs = require('querystring')
+      const that = this
       const param = qs.stringify({
         grant_type: 'client_credentials',
         client_id: 'iiSMXGQk0KvLx3leMiSQTq7L',
         client_secret: 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
       })
       return new Promise((resolve, reject) => {
-        this.$wxhttp
+        that.$wxhttp
           .get({
             url: '/oauth/2.0/token?' + param,
             agent: false
           })
           .then(res => {
-            this.token = res.access_token
+            that.token = res.access_token
+            that.base64({
+              url: that.img
+            }).then(res2 => {
+              that.imgBase = res2
+              that.getPlant(res.access_token, res2)
+            })
           })
-        this.base64({
-          url: this.img
-        }).then(res => {
-          this.imgBase = res
-          this.getPlant(res)
-        })
       })
     },
-    getPlant (url) {
+    async getPlant (token, url) {
       var qs = require('querystring')
       const param2 = qs.stringify({
-        access_token:
-          // this.token
-          '24.792949228fc0e1fc90cee6394dfa7882.2592000.1580200418.282335-17735891',
+        access_token: token,
         baike_num: 5
       })
 
@@ -124,21 +126,40 @@ export default {
           method: 'POST',
           success: function (res) {
             resolve(res.data.result)
-            // console.log(res.data.result[0].baike_info, 'rere')
             that.data1 = res.data.result
             that.plant = that.data1[0]
             that.data1 = that.data1.slice(1)
             that.plantDes = res.data.result[0].baike_info
             console.log(that.plant, that.data1, '88')
+
+            that.judgeList({isRefresh: true, keyWord: that.plant.name})
+            that.getList({isRefresh: true, keyWord: that.plant.name, type: true})
+            console.log(that.plantList, that.judge, 'plant')
+            // that.list.push(that.plantList)
+            // that.isRepeat()
           }
         })
-        console.log(this.plant, that.plant, this, 'wai')
       })
+    },
+    showFavor () {
+      this.isFavor = !this.isFavor
+    },
+    isRepeat () {
+    //   console.log(this.judge, this.plant.name, 'pll')
+      if (this.plantList.length !== 0) {
+        this.addList({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url, isFavor: false})
+        console.log(this.plant.name, this.$store.state.city, this.plantDes.description, this.plantDes.image_url)
+      }
     }
   }
 }
 </script>
 <style lang="scss" scoped>
+.content{
+    text-indent:2em;
+    padding:40rpx;
+    text-align: left;
+}
 .plant {
   width: 200rpx;
   height: 200rpx;

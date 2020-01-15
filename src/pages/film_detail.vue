@@ -58,6 +58,7 @@ export default {
   },
   onLoad () {
     this.item = JSON.parse(decodeURIComponent(this.$route.query.film))
+    console.log(this.item, this.$route)
   },
   methods: {
     theGetUserInfo () {
