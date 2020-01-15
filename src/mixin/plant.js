@@ -37,7 +37,6 @@ export const PLANT_LIST = {
             this.judge = false
             console.log(this.judge, 'jj')
           }
-          console.log(this.judge, 'jj2')
           this.nodata = this.$util.switchNodata(this.plantList)
           wx.hideLoading()
         })

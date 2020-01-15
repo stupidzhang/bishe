@@ -89,22 +89,22 @@ export default {
         client_id: 'iiSMXGQk0KvLx3leMiSQTq7L',
         client_secret: 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
       })
-      return new Promise((resolve, reject) => {
-        that.$wxhttp
-          .get({
-            url: '/oauth/2.0/token?' + param,
-            agent: false
+      //   return new Promise((resolve, reject) => {
+      that.$wxhttp
+        .get({
+          url: '/oauth/2.0/token?' + param,
+          agent: false
+        })
+        .then(res => {
+          that.token = res.access_token
+          that.base64({
+            url: that.img
+          }).then(res2 => {
+            that.imgBase = res2
+            that.getPlant(res.access_token, res2)
           })
-          .then(res => {
-            that.token = res.access_token
-            that.base64({
-              url: that.img
-            }).then(res2 => {
-              that.imgBase = res2
-              that.getPlant(res.access_token, res2)
-            })
-          })
-      })
+        })
+    //   })
     },
     async getPlant (token, url) {
       var qs = require('querystring')
@@ -114,42 +114,53 @@ export default {
       })
 
       const that = this
-      return new Promise((resolve, reject) => {
-        wx.request({
-          url:
+      //   return new Promise((resolve, reject) => {
+      wx.request({
+        url:
             'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' +
             param2,
-          data: { image: url },
-          header: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          method: 'POST',
-          success: function (res) {
-            resolve(res.data.result)
-            that.data1 = res.data.result
-            that.plant = that.data1[0]
-            that.data1 = that.data1.slice(1)
-            that.plantDes = res.data.result[0].baike_info
-            console.log(that.plant, that.data1, '88')
-
-            that.judgeList({isRefresh: true, keyWord: that.plant.name})
-            that.getList({isRefresh: true, keyWord: that.plant.name, type: true})
-            console.log(that.plantList, that.judge, 'plant')
-            // that.list.push(that.plantList)
-            // that.isRepeat()
-          }
-        })
+        data: { image: url },
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+        success: function (res) {
+        //   resolve(res.data.result)
+          that.data1 = res.data.result
+          that.plant = that.data1[0]
+          that.data1 = that.data1.slice(1)
+          that.plantDes = res.data.result[0].baike_info
+          console.log(that.plant, that.data1, '88')
+          that.isRepeat(that.plant.name)
+        }
       })
+    //   })
     },
     showFavor () {
       this.isFavor = !this.isFavor
     },
-    isRepeat () {
-    //   console.log(this.judge, this.plant.name, 'pll')
-      if (this.plantList.length !== 0) {
-        this.addList({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url, isFavor: false})
-        console.log(this.plant.name, this.$store.state.city, this.plantDes.description, this.plantDes.image_url)
-      }
+    judgeAll (v) {
+      this.judgeList({isRefresh: true, keyWord: v})
+      //   this.getList({isRefresh: true, keyWord: v, type: true})
+    },
+    async isRepeat (v) {
+    //   await this.judgeAll(v)
+      wx.cloud
+        .callFunction({
+          name: 'plantName',
+          data: {
+            keyWord: v,
+            pageNo: this.pageNo,
+            pageSize: this.pageSize
+          }
+        })
+        .then(res => {
+          console.log(res.result.data, res.result.data.length)
+          if (res.result.data.length === 0) {
+            this.addList({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url, isFavor: false})
+            console.log(this.plant.name, this.$store.state.city, this.plantDes.description, this.plantDes.image_url)
+          }
+        })
     }
   }
 }
