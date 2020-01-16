@@ -43,6 +43,7 @@
 import { getUserInfo } from '@/utils/business'
 import icon1 from '@/assets/images/icon/plant.png'
 import icon2 from '@/assets/images/icon/heart-active.png'
+import icon3 from '@/assets/images/icon/star.png'
 // import img1 from '../../static/img/film.png'
 export default {
   data () {
@@ -58,7 +59,7 @@ export default {
         },
         {
           name: '给我评分',
-          icon: icon2
+          icon: icon3
         }
       ],
       token: '',

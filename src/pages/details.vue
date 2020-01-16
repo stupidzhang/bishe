@@ -13,15 +13,11 @@
     </ul>
     <div class=" text-align-center margin-bototm60">
       <img :src="img" class="plant" />
-      <!-- <div   v-for="(item,index) in judgeFavorList"
-      :key="index"> -->
       <img
-    
         class="icon"
         :src="isFavor ? iconActive : icon"
         @click="showFavor"
       />
-      <!-- </div> -->
     </div>
     <div class=" text-align-center">也可能是他们</div>
     <div class="flex">
@@ -29,10 +25,10 @@
         class="other-plant margin-top30"
         v-for="(item, index) in data1"
         :key="index"
+        @click="otherDetial(item)"
       >
         <li>{{ item.name }}</li>
         <li><img :src="item.baike_info.image_url" class="img" /></li>
-        <!-- <li>匹配率： {{item.score}}</li> -->
       </ul>
     </div>
   </div>
@@ -40,9 +36,9 @@
 <script>
 import icon from '../assets/images/icon/heart-empty.png'
 import iconActive from '../assets/images/icon/heart-active.png'
-import {JUDGEFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST} from '@/mixin'
+import {ADDFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST} from '@/mixin'
 export default {
-  mixins: [JUDGEFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST],
+  mixins: [ADDFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST],
   data () {
     return {
       img: '',
@@ -89,7 +85,6 @@ export default {
         client_id: 'iiSMXGQk0KvLx3leMiSQTq7L',
         client_secret: 'wZY08RW8IOd8W1c4YwmEi0oKWY3XaKkX'
       })
-      //   return new Promise((resolve, reject) => {
       that.$wxhttp
         .get({
           url: '/oauth/2.0/token?' + param,
@@ -100,11 +95,9 @@ export default {
           that.base64({
             url: that.img
           }).then(res2 => {
-            that.imgBase = res2
             that.getPlant(res.access_token, res2)
           })
         })
-    //   })
     },
     async getPlant (token, url) {
       var qs = require('querystring')
@@ -114,7 +107,6 @@ export default {
       })
 
       const that = this
-      //   return new Promise((resolve, reject) => {
       wx.request({
         url:
             'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' +
@@ -125,23 +117,24 @@ export default {
         },
         method: 'POST',
         success: function (res) {
-        //   resolve(res.data.result)
           that.data1 = res.data.result
           that.plant = that.data1[0]
           that.data1 = that.data1.slice(1)
           that.plantDes = res.data.result[0].baike_info
+          that.imgBase = 'data:image/png;base64,' + url
           console.log(that.plant, that.data1, '88')
           that.isRepeat(that.plant.name)
         }
       })
-    //   })
     },
     showFavor () {
+      if (this.isFavor) {
+        console.log('删除')
+      } else {
+        console.log('加入')
+        this.addFavor({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase})
+      }
       this.isFavor = !this.isFavor
-    },
-    judgeAll (v) {
-      this.judgeList({isRefresh: true, keyWord: v})
-      //   this.getList({isRefresh: true, keyWord: v, type: true})
     },
     async isRepeat (v) {
     //   await this.judgeAll(v)
@@ -156,11 +149,17 @@ export default {
         })
         .then(res => {
           console.log(res.result.data, res.result.data.length)
-          if (res.result.data.length === 0) {
-            this.addList({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url, isFavor: false})
+          if (res.result.data.length === 0 && this.plant.name !== '非植物') {
+            this.addList({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase, isFavor: false})
             console.log(this.plant.name, this.$store.state.city, this.plantDes.description, this.plantDes.image_url)
+          } else if (this.plant.name !== '非植物') {
+            this.isFavor = res.result.data[0].isFavor
           }
         })
+    },
+    otherDetial (val) {
+      // 用popup
+      console.log('另外的植物可以收藏', val)
     }
   }
 }

@@ -2,13 +2,13 @@
   <div class="item">
     <div class="card">
       <div class="img_wrap">
-        <image class="item_image" :src="data.imgSrc" />
+        <image class="item_image" :src="data.image" />
       </div>
       <div class="cont_wrap">
         <div class="title_wrap">
           <div class="title">{{ data.name }}</div>
         </div>
-        <div class="desc">{{ data.desc }}</div>
+        <div class="desc">{{ data.description }}</div>
         <div class="cancel" @click="cancelFavor">取消收藏</div>
       </div>
     </div>
