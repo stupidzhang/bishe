@@ -62,7 +62,7 @@ export default {
   .item_image {
     display: block;
     width: 100%;
-    height: 599rpx;
+    height: 589rpx;
     border-radius: 7rpx 7rpx 0 0;
     z-index: 5;
     opacity: 0.7;
@@ -71,7 +71,7 @@ export default {
 /* 标题出处 */
 .title_wrap {
   width: 560rpx;
-  height: 100rpx;
+  height: 80rpx;
   margin: 0 auto;
   // padding-left: 130rpx;
   box-sizing: border-box;
@@ -89,7 +89,8 @@ export default {
 // 描述
 .desc {
   width: 554rpx;
-  height: 140rpx;
+  text-overflow: ellipsis;
+  overflow: auto;
   margin: 0 auto;
   color: #666666;
   font-size: 24rpx;

@@ -1,6 +1,7 @@
 <template>
   <div class="personal">
     <swiper
+    v-if="favorList.length!=0"
       class="personal_swiper"
       :previous-margin="previousMargin"
       :next-margin="nextMargin"
@@ -19,7 +20,7 @@
         </swiper-item>
       </block>
     </swiper>
-    <div class="swiper_dot_wrap">
+    <div class="swiper_dot_wrap"  v-if="favorList.length!=0">
       <ul>
         <li
           v-for="(item, index) in favorList"
@@ -28,40 +29,18 @@
         ></li>
       </ul>
     </div>
+    <div v-if="favorList.length===0" class="nodata">您还没有收藏过的植物，快去收藏吧</div>
   </div>
 </template>
 
 <script>
 import Card from '../components/card'
-import {FILM_LIST, FAVOR_LIST} from '@/mixin'
+import {DELFAVOR_LIST, FAVOR_LIST} from '@/mixin'
 export default {
-  mixins: [FILM_LIST, FAVOR_LIST],
+  mixins: [DELFAVOR_LIST, FAVOR_LIST],
   data () {
     return {
       curIndex: 0,
-      //   datalist: [
-      //     {
-      //       coverImg:
-      //         'http://n.sinaimg.cn/sinacn20118/201/w1080h721/20190119/3311-hrvcwnk7953342.jpg',
-      //       title: '摩尔曼斯克',
-      //       desc:
-      //         '摩尔曼斯克，北极圈内最大的城市，离芬兰也就半小时车程，整个城市才从极夜的天气中浮上来，太阳还未能升出地平线，城市只能靠云层的反射借光，一天只有几个小时的光亮，但红霞会持续一整天时间。'
-      //     },
-      //     {
-      //       coverImg:
-      //         'http://n.sinaimg.cn/sinacn20118/201/w1080h721/20190119/3311-hrvcwnk7953342.jpg',
-      //       title: '安纳托利亚往事',
-      //       desc:
-      //         '摩尔曼斯克2，北极圈内最大的城市，离芬兰也就半小时车程，整个城市才从极夜的天气中浮上来，太阳还未能升出地平线，城市只能靠云层的反射借光，一天只有几个小时的光亮，但红霞会持续一整天时间。'
-      //     },
-      //     {
-      //       coverImg:
-      //         'http://n.sinaimg.cn/sinacn20118/201/w1080h721/20190119/3311-hrvcwnk7953342.jpg',
-      //       title: '圣彼得堡是另一个阿姆斯特丹',
-      //       desc:
-      //         '摩尔曼斯克3，北极圈内最大的城市，离芬兰也就半小时车程，整个城市才从极夜的天气中浮上来，太阳还未能升出地平线，城市只能靠云层的反射借光，一天只有几个小时的光亮，但红霞会持续一整天时间。'
-      //     }
-      //   ],
       circular: true, // 设置衔接滑动
       previousMargin: '63rpx',
       nextMargin: '63rpx',
@@ -78,7 +57,11 @@ export default {
   },
   methods: {
     cancel (item, index) {
+      this.delFavor({name: item.name})
       console.log(item, index, '取消收藏')
+      this.$router.push({
+        path: 'favorite'
+      })
     },
     handleChange (e) {
       this.curIndex = e.mp.detail.current
@@ -161,5 +144,11 @@ export default {
       }
     }
   }
+}
+.nodata{
+    margin-top:50%;
+    text-align: center;
+    position: relative;
+    background:white;
 }
 </style>

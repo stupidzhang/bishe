@@ -34,11 +34,11 @@
           <div class="color-999 line-ellipsis description margin-top20">
             {{ item.description }}
           </div>
-          <!-- <div>  <img
+          <div>  <img
         class="icon"
-        :src="isFavor ? iconActive : icon"
+        :src="item.isFavor ? iconActive : icon"
         @click="showFavor"
-      /></div> -->
+      /></div>
         </div>
       </li>
     </ul>
@@ -46,9 +46,19 @@
 </template>
 
 <script>
+import icon from '../assets/images/icon/heart-empty.png'
+import iconActive from '../assets/images/icon/heart-active.png'
 export default {
   mounted () {
     console.log(this.mainList, '---')
+  },
+  data () {
+    return {
+      isFavor: false,
+      icon,
+      iconActive
+
+    }
   },
   methods: {
     clickItem (obj) {
@@ -88,7 +98,13 @@ export default {
   width: 480rpx;
   text-overflow: ellipsis;
   word-break: break-all;
-   white-space: nowrap;
+  white-space: nowrap;
   height:80rpx;
+}
+.icon {
+  width: 40rpx;
+  height:40rpx;
+  margin-top:-45rpx;
+  float:right;
 }
 </style>

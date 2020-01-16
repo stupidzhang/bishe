@@ -37,7 +37,11 @@ module.exports = [
     path: 'pages/details',
     name: 'details',
     config: {
-      navigationBarTitleText: '简介'
+      navigationBarTitleText: '简介',
+      usingComponents: {
+        'van-overlay': '../static/dist/overlay/index',
+        'van-icon': '../static/dist/icon/index'
+      }
     }
   },
   {

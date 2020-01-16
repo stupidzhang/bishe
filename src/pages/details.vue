@@ -28,17 +28,20 @@
         @click="otherDetial(item)"
       >
         <li>{{ item.name }}</li>
-        <li><img :src="item.baike_info.image_url" class="img" /></li>
+        <!-- <li><img :src="item.baike_info.image_url" class="img" /></li> -->
       </ul>
     </div>
+    <Overlay v-if="otherList" :data="otherList" :show="show" @close="close"></Overlay>
   </div>
 </template>
 <script>
 import icon from '../assets/images/icon/heart-empty.png'
 import iconActive from '../assets/images/icon/heart-active.png'
-import {ADDFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST} from '@/mixin'
+import {ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST} from '@/mixin'
+import Overlay from '../components/popup'
 export default {
-  mixins: [ADDFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST],
+  mixins: [ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST],
+  components: { Overlay },
   data () {
     return {
       img: '',
@@ -50,7 +53,14 @@ export default {
       icon,
       iconActive,
       isFavor: false,
-      list: []
+      show: false,
+      otherList: {}
+    }
+  },
+  watch: {
+    otherList (val, oldVal) {
+      this.otherList = val
+      console.log(this.otherList, 'watch')
     }
   },
   onLoad () {
@@ -129,10 +139,13 @@ export default {
     },
     showFavor () {
       if (this.isFavor) {
-        console.log('删除')
+        this.delFavor({name: this.plant.name})
+        this.updateList({name: this.plant.name, isFavor: false})
+        wx.showToast({title: '取消收藏', icon: 'none'})
       } else {
-        console.log('加入')
         this.addFavor({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase})
+        this.updateList({name: this.plant.name, isFavor: true})
+        wx.showToast({title: '收藏成功', icon: 'none'})
       }
       this.isFavor = !this.isFavor
     },
@@ -158,8 +171,17 @@ export default {
         })
     },
     otherDetial (val) {
+      if (!val.baike_info.description) {
+        delete val.baike_info
+      }
+      this.otherList = val
+      this.show = true
       // 用popup
-      console.log('另外的植物可以收藏', val)
+      console.log(this.otherList, '另植可收藏')
+    },
+    close () {
+      this.show = false
+      console.log('关闭')
     }
   }
 }
