@@ -62,7 +62,7 @@ export default {
   .item_image {
     display: block;
     width: 100%;
-    height: 589rpx;
+    height: 549rpx;
     border-radius: 7rpx 7rpx 0 0;
     z-index: 5;
     opacity: 0.7;

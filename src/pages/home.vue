@@ -18,7 +18,7 @@
               :class="['headerTab', { cur: headerTab === 1 }]"
               @tap="switchTab(1)"
             >
-              当前
+              搜索
             </p>
             <p
               :class="['headerTab', { cur: headerTab === 2 }]"
@@ -64,6 +64,9 @@ export default {
       filePaths: '',
       cityName: '' // 接口获得的当前地理位置
     }
+  },
+  onShow () {
+    this.getList({ isRefresh: true })
   },
   computed: {
     // 更改过或者当前地理位置

@@ -35,6 +35,16 @@
           @click="toPage(index)"
         />
       </van-grid>
+  <!-- <van-grid :column-num="1" >
+        <van-grid-item
+        v-if="!show"
+          :icon="icon3"
+          text="给我评分"
+          @click="rate"
+        />
+        <van-rate v-if="show" v-model="value" @change="change(v)"   class="text-align-center"></van-rate>
+      </van-grid> -->
+      
     </section>
   </div>
 </template>
@@ -44,7 +54,6 @@ import { getUserInfo } from '@/utils/business'
 import icon1 from '@/assets/images/icon/plant.png'
 import icon2 from '@/assets/images/icon/heart-active.png'
 import icon3 from '@/assets/images/icon/star.png'
-// import img1 from '../../static/img/film.png'
 export default {
   data () {
     return {
@@ -56,15 +65,19 @@ export default {
         {
           name: '附近的搜索',
           icon: icon1
-        },
-        {
-          name: '给我评分',
-          icon: icon3
         }
+        // ,
+        // {
+        //   name: '给我评分',
+        //   icon: icon3
+        // }
       ],
       token: '',
       imgBase: '',
-      test: '1'
+      test: '1',
+      show: false,
+      value: 4,
+      icon3
     }
   },
   computed: {
@@ -84,11 +97,17 @@ export default {
         this.$router.push({
           path: 'favorite'
         })
-      } else if (index === 1) {
+      } else {
         this.$router.push({
           path: 'otherSearch'
         })
       }
+    },
+    rate () { this.show = true },
+    change (v) {
+      console.log(v, '打分')
+      wx.showToast({title: '感谢您给我打了' + v + '分', icon: 'none'})
+      this.show = false
     }
   }
 }

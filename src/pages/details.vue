@@ -171,12 +171,14 @@ export default {
         })
     },
     otherDetial (val) {
-      if (!val.baike_info.description) {
+      this.otherList = {}
+      //   if (typeof val.score !== 'string') { val.score = val.score.toFixed(3) * 100 + '%' }
+      if (!val.baike_info || !val.baike_info.description) {
         delete val.baike_info
       }
       this.otherList = val
+      console.log(typeof this.otherList.score, '//')
       this.show = true
-      // 用popup
       console.log(this.otherList, '另植可收藏')
     },
     close () {

@@ -5,9 +5,15 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
-    return await db.collection('favor').where({
-    //   name: event.keyWord
-    }).get()
+    if (event.keyWord) {
+      return await db.collection('favor').where({
+        name: event.keyWord
+      }).get()
+    } else {
+      return await db.collection('favor').where({
+
+      }).get()
+    }
   } catch (e) {
     console.error(e)
   }

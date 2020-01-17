@@ -11,7 +11,8 @@
     "van-grid": "../static/dist/grid/index",
     "van-grid-item": "../static/dist/grid-item/index",
     "van-overlay":"../static/dist/overlay/index",
-    "van-icon": "../static/dist/icon/index"
+    "van-icon": "../static/dist/icon/index",
+    "van-rate": "../static/dist/rate/index"
 
   },
   "permission": {

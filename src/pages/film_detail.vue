@@ -4,56 +4,64 @@
       <section class="introWrap border-bottom1">
         <div class="flex-align">
           <div class="posterSize itemflex-00auto relative" style="border: 2rpx solid #666;">
-            <image v-if="item.poster" :src="item.poster" class="posterSize"></image>
+            <image v-if="item.image" :src="item.image" class="posterSize"></image>
             <i v-else class="icon-video font-size12 color-666 absolute translateXY"></i>
           </div>
           <div class="paddingX20 width100">
             <div class="flex-align-spacebetween">
               <p class="flex-align" style="width: 65%">
-                <span class="font-size4 line-ellipsis">{{item.title}}</span>
+                <span class="font-size4 line-ellipsis">{{item.name}}</span>
                 <span v-if="item.is3D" class="margin-left10 icon-3DIMAX itemflex-00auto"></span>
               </p>
               <p class="padding-left10 itemflex-00auto color-yellow" style="max-width: 35%">
-                <span v-if="item.expect">{{item.expect}}<span class="font-size-8">人想看</span></span>
-                <span v-else-if="item.score">{{item.score}}<span class="font-size-8">分</span></span>
-                <span v-else class="font-size-4 color-666">暂无评分</span>
+                <!-- <span v-if="item.city">{{item.city}}</span> -->
+                <!-- <span v-else class="font-size-4 color-666">暂无评分</span> -->
               </p>
             </div>
-            <div class="margin-top10 color-999 line-ellipsis">{{item.type}}</div>
-            <div class="color-999 flex-align-spacebetween">
-              <p class="line-ellipsis" style="width: 80%">{{item.actor}}</p>
+            <div class="margin-top20 color-999 line-ellipsis">您在{{item.city}}搜索该植物</div>
+            <!-- <div class="color-999 flex-align-spacebetween">
+              <p class="line-ellipsis" style="width: 80%">acccccccc</p>
               <p>
-                <button v-if="item.isShow" class="btn-red">购票</button>
-                <button v-else class="btn-blue">预售</button>
+                <button  class="btn-red">购票</button>
+                <button class="btn-blue">预售</button>
               </p>
-            </div>
-            <div class="color-999 line-ellipsis">今天{{item.cinema}}家影院放映{{item.field}}场</div>
+            </div> -->
           </div>
         </div>
         <div class="margin-top20 flex-align-spacebetween">
-          <p class="operateBtn flex-align-justify">
-            <i class="margin-right10 icon-like-fill"></i>想看
+          <p class="operateBtn flex-align-justify" @click="hasFavor">
+ <img
+        class="icon margin-right10"
+        :src="item.isFavor ? iconActive : icon"
+        
+      />{{item.isFavor?'已收藏':'收藏'}}
+            <!-- <i class="margin-right10 icon-like"></i>收藏 -->
           </p>
-          <p class="operateBtn flex-align-justify">
-            <i class="margin-right10 icon-star font-size8"></i>评分
+          <p class="operateBtn flex-align-justify" @click="wantBuy">
+            <i class="margin-right10 icon-buy font-size8"></i>想买
           </p>
         </div>
       </section>
-      <div class="bgcolor-white padding20X paddingX30 flex-align color-black border-bottom1">
-        <i class="margin-right10 icon-egg color-blue font-size4"></i>片尾有三个彩蛋，不要错过哦~
+      <div class="bgcolor-white padding20X paddingX30 flex-align color-black">
+        <!-- <i class="margin-right10 icon-egg color-blue font-size4"></i>片尾有三个彩蛋，不要错过哦~ -->
+        {{item.description}}
       </div>
     </main>
-    <footer class="fixed bottom0 left0 right0">
+    <!-- <footer class="fixed bottom0 left0 right0">
       <button open-type="getUserInfo" @getuserinfo="theGetUserInfo" style="background-color: #f0423b;border-radius: 0;color: #fff">优惠购票</button>
-    </footer>
+    </footer> -->
   </div>
 </template>
 <script>
+import icon from '../assets/images/icon/heart-empty.png'
+import iconActive from '../assets/images/icon/heart-active.png'
+import { FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST, UPDATEPLANT_LIST } from '@/mixin'
 import { getUserInfo } from '@/utils/business'
 export default {
+  mixins: [FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST, UPDATEPLANT_LIST],
   data () {
     return {
-      item: {}
+      item: {}, icon, iconActive
     }
   },
   onLoad () {
@@ -75,6 +83,26 @@ export default {
       }).then(() => {
         this.$router.push('select_seat')
       })
+    },
+    hasFavor () {
+      console.log(this.item.isFavor, '收藏')
+      if (this.item.isFavor) {
+        this.item.isFavor = false
+        this.delFavor({name: this.item.name})
+        this.updateList({name: this.item.name, isFavor: false})
+      } else {
+        this.item.isFavor = true
+        this.addFavor({
+          name: this.item.name,
+          city: this.item.city,
+          description: this.item.description,
+          image: this.item.image
+        })
+        this.updateList({name: this.item.name, isFavor: true})
+      }
+    },
+    wantBuy () {
+      wx.showToast({title: '麻烦亲去淘宝搜搜哦~', icon: 'none'})
     }
   }
 }
@@ -91,6 +119,9 @@ export default {
   .icon-3DIMAX {
     color: #fff;
     font-size: 60rpx;
+  }  .icon {
+    width: 40rpx;
+    height: 40rpx;
   }
   .operateBtn {
     width: 48%;

@@ -16,7 +16,10 @@ module.exports = [
     path: 'pages/personal',
     name: 'personal',
     config: {
-      navigationBarTitleText: '我的'
+      navigationBarTitleText: '我的',
+      usingComponents: {
+        'van-rate': '../static/dist/rate/index'
+      }
     }
   },
   {
@@ -40,7 +43,8 @@ module.exports = [
       navigationBarTitleText: '简介',
       usingComponents: {
         'van-overlay': '../static/dist/overlay/index',
-        'van-icon': '../static/dist/icon/index'
+        'van-icon': '../static/dist/icon/index',
+        'van-button': '../../static/dist/button/index'
       }
     }
   },
