@@ -16,6 +16,7 @@ export default {
       title: title
     })
     this.url = this.$store.state.webViewUrl
+    console.log(this.url)
   }
 }
 </script>

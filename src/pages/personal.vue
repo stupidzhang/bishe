@@ -43,15 +43,15 @@
           @click="rate"
         />
         <van-rate v-if="show" v-model="value" @change="change(v)"   class="text-align-center"></van-rate>
-      </van-grid> -->
-      
+      </van-grid>
+       -->
     </section>
   </div>
 </template>
 
 <script>
 import { getUserInfo } from '@/utils/business'
-import icon1 from '@/assets/images/icon/plant.png'
+import icon1 from '@/assets/images/icon/earth.png'
 import icon2 from '@/assets/images/icon/heart-active.png'
 import icon3 from '@/assets/images/icon/star.png'
 export default {
@@ -63,7 +63,7 @@ export default {
           icon: icon2
         },
         {
-          name: '附近的搜索',
+          name: '我搜索的区域',
           icon: icon1
         }
         // ,
@@ -103,7 +103,9 @@ export default {
         })
       }
     },
-    rate () { this.show = true },
+    rate () {
+      this.show = true
+    },
     change (v) {
       console.log(v, '打分')
       wx.showToast({title: '感谢您给我打了' + v + '分', icon: 'none'})
