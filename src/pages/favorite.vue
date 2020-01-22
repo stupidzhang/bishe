@@ -20,6 +20,7 @@
         </swiper-item>
       </block>
     </swiper>
+    <div class="flex-justify">
     <div class="swiper_dot_wrap"  v-if="favorList.length!=0">
       <ul>
         <li
@@ -29,15 +30,16 @@
         ></li>
       </ul>
     </div>
+    </div>
     <div v-if="favorList.length===0" class="nodata">您还没有收藏过的植物，快去收藏吧</div>
   </div>
 </template>
 
 <script>
 import Card from '../components/card'
-import {DELFAVOR_LIST, FAVOR_LIST} from '@/mixin'
+import {DELFAVOR_LIST, FAVOR_LIST, UPDATEPLANT_LIST} from '@/mixin'
 export default {
-  mixins: [DELFAVOR_LIST, FAVOR_LIST],
+  mixins: [DELFAVOR_LIST, FAVOR_LIST, UPDATEPLANT_LIST],
   data () {
     return {
       curIndex: 0,
@@ -51,17 +53,26 @@ export default {
   components: {
     Card
   },
+  watch: {
+    favorList (val, oldVal) {
+      this.favorList = val
+      console.log(this.favorList, 'watch')
+    }
+  },
   onLoad () {
     this.getList({ isRefresh: true })
-    console.log(this.favorList, this.plantList, 'fff')
+    console.log(this.favorList, 'favorList')
   },
   methods: {
     cancel (item, index) {
       this.delFavor({name: item.name})
+      this.updateList({name: item.name, isFavor: false})
       console.log(item, index, '取消收藏')
-      this.$router.push({
-        path: 'favorite'
-      })
+      this.getList({ isRefresh: true })
+      console.log(this.favorList, 'favorlist')
+    //   this.$router.push({
+    //     path: 'favorite'
+    //   })
     },
     handleChange (e) {
       this.curIndex = e.mp.detail.current
@@ -107,7 +118,7 @@ export default {
   background: #303030;
 }
 .personal {
-  background: #303030;
+//   background: #303030;
 }
 .item {
   transform: scale(0.9);
@@ -122,8 +133,6 @@ export default {
 .swiper_dot_wrap {
   position: relative;
   top: 66rpx;
-  left: 30%;
-  width: 200rpx;
   height: 15rpx;
   ul {
     float: right;
