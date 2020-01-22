@@ -4,7 +4,7 @@
       <img :src="close" class="close" @click="closePop" />
       <div v-if="data.baike_info">
         <img :src="data.baike_info.image_url" class="img" />
-        <div class="description">{{ data.baike_info.description }}<span class="color-blue margin-left10" @click='moreDe'>具体内容</span></div>
+        <div class="description scroll-y">{{ data.baike_info.description }}<span class="color-blue margin-left10" @click='moreDe'>具体内容</span></div>
       </div>
       <div v-else>
         <div class="name">{{ data.name }}</div>
@@ -122,7 +122,8 @@ export default {
     padding: 30rpx;
     text-indent: 1em;
     max-height: 200rpx;
-    overflow: auto;
+    // overflow: auto;
+    -webkit-overflow-scrolling: touch
   }
   .close {
     position: absolute;

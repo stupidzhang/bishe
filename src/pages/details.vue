@@ -5,7 +5,7 @@
       <li v-if="plantDes.description" class="content">
         {{ plantDes.description }}<span class="font-size2 color-blue">地域分布</span>
       </li>
-      <li v-else class="margin-top30">
+      <li v-if="!plantDes.description" class="margin-top30">
         <div>{{ plant.name }}</div>
         抱歉，百度接口内未提供介绍
       </li>

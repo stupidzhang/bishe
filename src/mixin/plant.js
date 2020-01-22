@@ -6,7 +6,7 @@ export const PLANT_LIST = {
       nodata: false,
       pageNo: 1,
       pageSize: 6,
-      hasMore: true
+      hasMore: false
     }
   },
   methods: {
@@ -30,20 +30,16 @@ export const PLANT_LIST = {
           }
         })
         .then(res => {
-          console.log(res.result.data.length, 'res', type)
-          this.hasMore = !(res.result.data.length < this.pageSize)
+          console.log(res.result.data.length, 'res')
+          //   this.hasMore = !(res.result.data.length < this.pageSize)
           this.plantList.push(...res.result.data)
-          if (type === true && res.result.data.length !== 0) {
-            this.judge = false
-            console.log(this.judge, 'jj')
-          }
           this.nodata = this.$util.switchNodata(this.plantList)
           wx.hideLoading()
         })
     },
     loadMore () {
       if (this.hasMore) {
-        this.getList({ isRefresh: false, keyWord: this.keyWord, type: this.type })
+        this.getList({ isRefresh: false, keyWord: this.keyWord })
       }
     }
   }

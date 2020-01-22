@@ -66,7 +66,9 @@ export default {
     }
   },
   onShow () {
-    this.getList({ isRefresh: true })
+    if (this.headerTab === 2) {
+      this.getList({ isRefresh: true })
+    }
   },
   computed: {
     // 更改过或者当前地理位置
