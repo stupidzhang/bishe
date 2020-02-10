@@ -6,7 +6,7 @@ export const ADDPLANT_LIST = {
     }
   },
   methods: {
-    addList ({ name = '', city = '', description = '', image = '', isFavor }) {
+    addList ({ name = '', city = '', province = '', description = '', image = '', isFavor }) {
     //   wx.showLoading({
     //     title: '加载中'
     //   })
@@ -16,13 +16,14 @@ export const ADDPLANT_LIST = {
           data: {
             name: name,
             city: city,
+            province: province,
             description: description,
             image: image,
             isFavor: isFavor
           }
         })
         .then(res => {
-        //   console.log(res.result.data, 'res')
+        //   console.log(res.result.data, province, 'province,res')
         //   this.hasMore = !(res.result.data.length < this.pageSize)
         //   this.plantList.push(...res.result.data)
         //   this.nodata = this.$util.switchNodata(this.plantList)
@@ -31,7 +32,7 @@ export const ADDPLANT_LIST = {
     },
     loadMore () {
       if (this.hasMore) {
-        this.addList({ name: this.name, city: this.city, description: this.description, image: this.image, isFavor: this.isFavor })
+        this.addList({ name: this.name, city: this.city, province: this.province, description: this.description, image: this.image, isFavor: this.isFavor })
       }
     }
   }

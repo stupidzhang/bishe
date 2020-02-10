@@ -163,7 +163,8 @@ export default {
         .then(res => {
           console.log(res.result.data, res.result.data.length)
           if (res.result.data.length === 0 && this.plant.name !== '非植物') {
-            this.addList({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase, isFavor: false})
+            console.log(this.$store.state.province, 'sheng')
+            this.addList({name: this.plant.name, city: this.$store.state.city, province: this.$store.state.province, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase, isFavor: false})
             console.log(this.plant.name, this.$store.state.city, this.plantDes.description, this.plantDes.image_url)
           } else if (this.plant.name !== '非植物') {
             this.isFavor = res.result.data[0].isFavor

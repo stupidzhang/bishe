@@ -14,9 +14,12 @@ const mutations = {
   [types.SET_CITY] (state, v) {
     state.city = v
   },
+  [types.SET_PROVINCE] (state, v) {
+    state.province = v
+  },
   [types.SET_WEB_VIEW_URL] (state, v) {
     state.webViewUrl = v
-  },
+  }
 }
 
 export default mutations

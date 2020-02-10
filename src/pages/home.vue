@@ -62,7 +62,8 @@ export default {
       headerTab: 1,
       img: require('@/assets/images/icon/camera.png'),
       filePaths: '',
-      cityName: '' // 接口获得的当前地理位置
+      cityName: '', // 接口获得的当前地理位置
+      province: ''
     }
   },
   onShow () {
@@ -102,11 +103,13 @@ export default {
             success: function (res) {
               if (res && res.data) {
                 console.log(res)
+                scope.province = res.data.result.addressComponent.province
                 scope.cityName = res.data.result.addressComponent.city
                 scope.cityName = scope.cityName.substring(
                   0,
                   scope.cityName.length - 1
                 )
+                scope.$store.commit(scope.$types.SET_PROVINCE, scope.province)
                 scope.$store.commit(scope.$types.SET_CITY, scope.cityName)
               } else {
                 scope.$toast(res.result)

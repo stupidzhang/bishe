@@ -9,6 +9,7 @@ exports.main = async (event, context) => {
       data: {
         name: event.name,
         city: event.city,
+        province: event.province,
         description: event.description,
         image: event.image,
         isFavor: event.isFavor
