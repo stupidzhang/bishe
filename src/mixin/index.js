@@ -5,6 +5,8 @@ import { ADDFAVOR_LIST } from './addFavor'
 import { DELFAVOR_LIST } from './delFavor'
 import { ADDPLANT_LIST } from './addPlant'
 import { UPDATEPLANT_LIST } from './updatePlant'
+import { AREA_LIST } from './area'
+import { ADDAREA_LIST } from './addArea'
 
 export {
   FILM_LIST,
@@ -13,5 +15,7 @@ export {
   ADDFAVOR_LIST,
   DELFAVOR_LIST,
   ADDPLANT_LIST,
-  UPDATEPLANT_LIST
+  UPDATEPLANT_LIST,
+  AREA_LIST,
+  ADDAREA_LIST
 }

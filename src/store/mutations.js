@@ -19,6 +19,9 @@ const mutations = {
   },
   [types.SET_WEB_VIEW_URL] (state, v) {
     state.webViewUrl = v
+  },
+  [types.SET_PROVLIST] (state, v) {
+    state.provList = v
   }
 }
 

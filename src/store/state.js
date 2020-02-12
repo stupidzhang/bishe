@@ -6,6 +6,7 @@ const state = {
   userInfo: null, // 微信开放数据的用户信息
   city: '杭州', // 城市
   province: '初始省',
+  provList: [],
   webViewUrl: null
 }
 
