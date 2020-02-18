@@ -1,10 +1,9 @@
 <template>
-  <div class="skeleton">
-      <skeleton selector="skeleton" bgcolor="#FFF" v-if="showSkeleton"></skeleton>
-    <div class="text-align-center font-size12 margin-top30">介绍</div>
+  <div>
+    <div class="text-align-center font-size12 margin-top30">等我检索哦</div>
     <ul class="paddingX40 line-height50 font-size4 text-align-center">
       <li v-if="plantDes.description" class="content">
-        {{ plantDes.description }}
+        {{ plantDes.description }}<span class="font-size2 color-blue">地域分布</span>
       </li>
       <li v-if="!plantDes.description" class="margin-top30">
         <div>{{ plant.name }}</div>
@@ -39,10 +38,9 @@ import icon from '../assets/images/icon/heart-empty.png'
 import iconActive from '../assets/images/icon/heart-active.png'
 import {ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST} from '@/mixin'
 import Overlay from '../components/popup'
-import skeleton from '../components/skeleton'
 export default {
   mixins: [ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST],
-  components: { skeleton, Overlay },
+  components: { Overlay },
   data () {
     return {
       img: '',
@@ -55,8 +53,7 @@ export default {
       iconActive,
       isFavor: false,
       show: false,
-      otherList: {},
-      showSkeleton: true
+      otherList: {}
     }
   },
   watch: {
@@ -172,7 +169,6 @@ export default {
             this.isFavor = res.result.data[0].isFavor
           }
         })
-      this.showSkeleton = false
     },
     otherDetial (val) {
       this.otherList = {}

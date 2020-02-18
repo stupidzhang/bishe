@@ -35,10 +35,11 @@
           </a>
         </header>
         <div v-if="headerTab === 1">
-          <div></div>
+          <div style="height:1020rpx"> <img :src="imgBack" class="back" />
           <div>
             <img :src="img" class="img-plant" @click="open" />
           </div>
+        </div>
         </div>
         <film-list
           v-if="headerTab === 2"
@@ -61,6 +62,7 @@ export default {
     return {
       headerTab: 1,
       img: require('@/assets/images/icon/camera.png'),
+      imgBack: require('@/assets/images/timg.jpg'),
       filePaths: '',
       cityName: '', // 接口获得的当前地理位置
       province: ''
@@ -170,6 +172,10 @@ $color-blue: #55b1e8;
     position: absolute;
     bottom: 80rpx;
     left: 320rpx;
+  }
+    .back{
+    width:100%;
+    height:100%;
   }
 }
 </style>

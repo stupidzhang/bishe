@@ -1,6 +1,7 @@
 const host = 'https://aip.baidubce.com'
 
 function request (url, method, data, header = {}) {
+  console.log(data, 'datadata')
   wx.showLoading({
     title: '加载中' // 数据请求前loading
   })
@@ -9,9 +10,9 @@ function request (url, method, data, header = {}) {
       url: host + url, // 仅为示例
       method: method,
       data: data,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded' // 默认值
-      },
+      header:
+        header, // 默认值
+
       success: function (res) {
         wx.hideLoading()
         resolve(res.data)

@@ -24,8 +24,8 @@ function initChart (canvas, width, height) {
   //   var dataList = provLi.PROVINCE_LIST.methods.getList()
   var dataList = [ {
     id: 1111,
-    name: '浙江省'
-    // value: 104
+    name: '浙江省',
+    value: 104
   } ]
   //   wx.cloud
   //     .callFunction({
@@ -54,7 +54,7 @@ function initChart (canvas, width, height) {
       triggerOn: 'click',
       formatter: function (e, t, n) {
         console.log(e, t, n, '??/')
-        return '在' + e.name + '你搜索了' + e.value ? e.value : ''
+        return '在' + e.name + '你搜索了' + e.value
       }
     },
     visualMap: {

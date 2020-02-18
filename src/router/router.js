@@ -47,6 +47,17 @@ module.exports = [
         'van-button': '../../static/dist/button/index'
       }
     }
+  }, {
+    path: 'pages/detailWait',
+    name: 'detailWait',
+    config: {
+      navigationBarTitleText: '等我检索哦',
+      usingComponents: {
+        'van-overlay': '../static/dist/overlay/index',
+        'van-icon': '../static/dist/icon/index',
+        'van-button': '../../static/dist/button/index'
+      }
+    }
   },
   {
     path: 'pages/favorite',
