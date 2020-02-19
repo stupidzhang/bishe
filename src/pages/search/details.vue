@@ -35,11 +35,9 @@
   </div>
 </template>
 <script>
-import icon from '../assets/images/icon/heart-empty.png'
-import iconActive from '../assets/images/icon/heart-active.png'
 import {ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST} from '@/mixin'
-import Overlay from '../components/popup'
-import skeleton from '../components/skeleton'
+import Overlay from '../../components/popup'
+import skeleton from '../../components/skeleton'
 export default {
   mixins: [ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST],
   components: { skeleton, Overlay },
@@ -51,8 +49,8 @@ export default {
       data1: [],
       plant: [],
       plantDes: '',
-      icon,
-      iconActive,
+      icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png',
+      iconActive: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png',
       isFavor: false,
       show: false,
       otherList: {},

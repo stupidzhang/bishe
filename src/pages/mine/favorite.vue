@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import Card from '../components/card'
+import Card from '../../components/card'
 import {DELFAVOR_LIST, FAVOR_LIST, UPDATEPLANT_LIST} from '@/mixin'
 export default {
   mixins: [DELFAVOR_LIST, FAVOR_LIST, UPDATEPLANT_LIST],

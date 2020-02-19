@@ -62,8 +62,8 @@ export default {
   data () {
     return {
       headerTab: 1,
-      img: require('@/assets/images/icon/camera2.png'),
-      imgBack: require('@/assets/images/timg.jpg'),
+      img: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/camera2.png',
+      imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/timg.jpg',
       filePaths: '',
       cityName: '', // 接口获得的当前地理位置
       province: ''

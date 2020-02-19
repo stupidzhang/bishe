@@ -51,20 +51,20 @@
 
 <script>
 import { getUserInfo } from '@/utils/business'
-import icon1 from '@/assets/images/icon/earth.png'
-import icon2 from '@/assets/images/icon/heart-active.png'
-import icon3 from '@/assets/images/icon/star.png'
+// import icon1 from 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/earth.png'
+// import icon2 from 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png'
+// import icon3 from 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/star.png'
 export default {
   data () {
     return {
       userdata: [
         {
           name: '我的收藏',
-          icon: icon2
+          icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png'
         },
         {
           name: '我搜索的区域',
-          icon: icon1
+          icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/earth.png'
         }
         // ,
         // {
@@ -76,8 +76,7 @@ export default {
       imgBase: '',
       test: '1',
       show: false,
-      value: 4,
-      icon3
+      value: 4
     }
   },
   computed: {

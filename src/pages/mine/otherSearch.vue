@@ -9,8 +9,8 @@
 <script>
 import * as echarts from 'echarts/dist/echarts.min'
 import mpvueEcharts from 'mpvue-echarts'
-import geoJson from '../china.json'
-import * as provLi from '../daraProvince'
+import geoJson from '../../china.json'
+import * as provLi from '../../daraProvince'
 
 import { AREA_LIST } from '@/mixin'
 function initChart (canvas, width, height) {

@@ -17,11 +17,6 @@
   </van-overlay>
 </template>
 <script>
-import icon from '../assets/images/icon/heart-empty.png'
-import iconActive from '../assets/images/icon/heart-active.png'
-import close from '../assets/images/icon/close.png'
-import nodata from '../assets/images/no.png'
-
 import { FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST } from '@/mixin'
 export default {
   mixins: [FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST],
@@ -34,12 +29,10 @@ export default {
 
   data () {
     return {
-      icon,
-      iconActive,
-      close,
+      close: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/close.png',
       text: '我要收藏',
       more: '',
-      nodata
+      nodata: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/no.png'
     }
   },
   onLoad () {

@@ -1,7 +1,7 @@
 // 首个路由为首页
 module.exports = [
   {
-    path: 'pages/home',
+    path: 'pages/search/home',
     name: 'home',
     config: {
       navigationBarTitleText: '植物识别',
@@ -13,7 +13,7 @@ module.exports = [
   },
 
   {
-    path: 'pages/personal',
+    path: 'pages/mine/personal',
     name: 'personal',
     config: {
       navigationBarTitleText: '我的',
@@ -23,21 +23,21 @@ module.exports = [
     }
   },
   {
-    path: 'pages/select_city',
+    path: 'pages/search/select_city',
     name: 'select_city',
     config: {
       navigationBarTitleText: '选择城市'
     }
   },
   {
-    path: 'pages/search',
+    path: 'pages/search/search',
     name: 'search',
     config: {
       navigationBarTitleText: '搜索'
     }
   },
   {
-    path: 'pages/details',
+    path: 'pages/search/details',
     name: 'details',
     config: {
       navigationBarTitleText: '简介',
@@ -49,7 +49,7 @@ module.exports = [
     }
   },
   {
-    path: 'pages/favorite',
+    path: 'pages/mine/favorite',
     name: 'favorite',
     config: {
       navigationBarTitleText: '我的收藏',
@@ -60,21 +60,21 @@ module.exports = [
     }
   },
   {
-    path: 'pages/otherSearch',
+    path: 'pages/mine/otherSearch',
     name: 'otherSearch',
     config: {
       navigationBarTitleText: '看看别人'
     }
   },
   {
-    path: 'pages/plant_detail',
+    path: 'pages/search/plant_detail',
     name: 'plant_detail',
     config: {
       navigationBarTitleText: '植物详情'
     }
   },
   {
-    path: 'pages/web_view',
+    path: 'pages/search/web_view',
     name: 'web_view',
     config: {
       navigationBarTitleText: '网页'

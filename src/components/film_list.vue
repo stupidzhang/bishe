@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import icon from '../assets/images/icon/heart-empty.png'
-import iconActive from '../assets/images/icon/heart-active.png'
 export default {
   mounted () {
     console.log(this.mainList, '---')
@@ -55,8 +53,8 @@ export default {
   data () {
     return {
       isFavor: false,
-      icon,
-      iconActive
+      icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png',
+      iconActive: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png'
 
     }
   },

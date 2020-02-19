@@ -1,6 +1,26 @@
 {
   "cloud": true,
   "pages": [],
+  "subPackages": [
+    {
+      "root": "pages/search/",
+      "pages": [
+        "home",
+        "details",
+        "plant_detail",
+        "search",
+        "select_city",
+        "wev_view"
+      ]
+    },
+    {
+      "root": "pages/mine/",
+      "pages": [
+        "favorite",
+        "otherSearch",
+        "personal"
+      ]
+    }],
   "window": {
     "navigationBarBackgroundColor": "#32Ae57",
     "navigationBarTitleText": "植物识别",
@@ -27,7 +47,7 @@
     "backgroundColor": "#fff",
     "list": [
       {
-        "pagePath": "pages/home",
+        "pagePath": "pages/search/home",
 
         "requiredBackgroundModes": ["location"],
         "text": "识别",
@@ -35,7 +55,7 @@
         "selectedIconPath": "/static/img/plant_active.png"
       },
       {
-        "pagePath": "pages/personal",
+        "pagePath": "pages/mine/personal",
         "text": "我的",
         "iconPath": "/static/img/personal.png",
         "selectedIconPath": "/static/img/personal_active.png"

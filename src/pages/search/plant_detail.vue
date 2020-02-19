@@ -53,15 +53,13 @@
   </div>
 </template>
 <script>
-import icon from '../assets/images/icon/heart-empty.png'
-import iconActive from '../assets/images/icon/heart-active.png'
 import { FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST, UPDATEPLANT_LIST } from '@/mixin'
 import { getUserInfo } from '@/utils/business'
 export default {
   mixins: [FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST, UPDATEPLANT_LIST],
   data () {
     return {
-      item: {}, icon, iconActive
+      item: {}, icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png', iconActive: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png'
     }
   },
   onLoad () {
