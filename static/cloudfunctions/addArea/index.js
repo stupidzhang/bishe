@@ -5,12 +5,13 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
-    return await db.collection('area').add({
+    return await db.collection('area').where({
+      name: event.name
+    }).update({
       data: {
-        province: event.province,
-        plantName: event.plantName
+        'value': event.value
       }
-    })
+    }).then(res => { console.log(event.value) })
   } catch (e) {
     console.error(e)
   }

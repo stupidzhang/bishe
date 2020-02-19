@@ -20,13 +20,13 @@ function initChart (canvas, width, height) {
   })
   canvas.setChart(chart)
   echarts.registerMap('china', geoJson)
-  console.log(provLi.PROVINCE_LIST.methods.getList().length, '11===')
-  //   var dataList = provLi.PROVINCE_LIST.methods.getList()
-  var dataList = [ {
-    id: 1111,
-    name: '浙江省',
-    value: 104
-  } ]
+  console.log(provLi.PROVINCE_LIST.methods.addAreaList().length, '11===')
+  var dataList = provLi.PROVINCE_LIST.methods.addAreaList()
+  //   var dataList = [ {
+  //     id: 1111,
+  //     name: '浙江省',
+  //     value: 104
+  //   } ]
   //   wx.cloud
   //     .callFunction({
   //       name: 'area'

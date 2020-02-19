@@ -1,45 +1,74 @@
 <template>
   <div class="skeleton">
-      <skeleton selector="skeleton" bgcolor="#FFF" v-if="showSkeleton"></skeleton>
-    <div class="text-align-center font-size12 margin-top30">介绍</div>
-    <ul class="paddingX40 line-height50 font-size4 text-align-center">
-      <li v-if="plantDes.description" class="content">
-        {{ plantDes.description }}
-      </li>
-      <li v-if="!plantDes.description" class="margin-top30">
-        <div>{{ plant.name }}</div>
-        抱歉，百度接口内未提供介绍
-      </li>
-      <li><img :src="plantDes.image_url" class="plant" /></li>
-    </ul>
-    <div class=" text-align-center margin-bototm60">
-      <img :src="img" class="plant" />
-      <img
-        class="icon"
-        :src="isFavor ? iconActive : icon"
-        @click="showFavor"
-      />
+    <skeleton selector="skeleton" bgcolor="#FFF" v-if="showSkeleton"></skeleton>
+    <div class="main">
+      <div class="text-align-center padding-top100">
+        <img :src="img" class="plant" />
+      </div>
+      <div class="text-align-center search" v-if="plantDes.description">
+        <div class="flex-align">
+          <div v-if="plantDes.description" class="paddingX30 padding20X">
+            <img :src="plantDes.image_url" class="plant2" />
+          </div>
+          <div class="margin-top20">
+            <div class="content color-white" v-if="plantDes.description">
+              {{ plantDes.description }}
+            </div>
+          </div>
+        </div>
+        <div class="more flex margin-top20" v-if="plantDes.description">
+          <span class="color-white padding-left30 ">也可能是他们：</span>
+          <ul
+            class="other-plant"
+            v-for="(item, index) in data1"
+            :key="index"
+            @click="otherDetial(item)"
+          >
+            <li class="color-green">{{ item.name }}</li>
+          </ul>
+          <img
+            class="icon"
+            :src="isFavor ? iconActive : icon"
+            @click="showFavor"
+          />
+        </div>
+      </div>
+      <div class="text-align-center search" v-if="!plantDes.description">
+        <div class="font-size6 color-white margin-top100">{{ plant.name }}</div>
+
+        <div class="margin-top30 color-white">抱歉，百度接口内未提供介绍</div>
+      </div>
+      <Overlay
+        v-if="otherList"
+        :data="otherList"
+        :show="show"
+        @close="close"
+      ></Overlay>
     </div>
-    <div class=" text-align-center">也可能是他们</div>
-    <div class="flex">
-      <ul
-        class="other-plant margin-top30"
-        v-for="(item, index) in data1"
-        :key="index"
-        @click="otherDetial(item)"
-      >
-        <li>{{ item.name }}</li>
-      </ul>
-    </div>
-    <Overlay v-if="otherList" :data="otherList" :show="show" @close="close"></Overlay>
   </div>
 </template>
 <script>
-import {ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST} from '@/mixin'
+import {
+  ADDFAVOR_LIST,
+  DELFAVOR_LIST,
+  ADDPLANT_LIST,
+  PLANT_LIST,
+  UPDATEPLANT_LIST,
+  ADDAREA_LIST,
+  AREA_LIST
+} from '@/mixin'
 import Overlay from '../../components/popup'
 import skeleton from '../../components/skeleton'
 export default {
-  mixins: [ADDFAVOR_LIST, DELFAVOR_LIST, ADDPLANT_LIST, PLANT_LIST, UPDATEPLANT_LIST],
+  mixins: [
+    ADDFAVOR_LIST,
+    DELFAVOR_LIST,
+    ADDPLANT_LIST,
+    PLANT_LIST,
+    UPDATEPLANT_LIST,
+    ADDAREA_LIST,
+    AREA_LIST
+  ],
   components: { skeleton, Overlay },
   data () {
     return {
@@ -49,12 +78,15 @@ export default {
       data1: [],
       plant: [],
       plantDes: '',
-      icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png',
-      iconActive: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png',
+      icon:
+        'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png',
+      iconActive:
+        'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png',
       isFavor: false,
       show: false,
       otherList: {},
-      showSkeleton: true
+      showSkeleton: true,
+      areaList: []
     }
   },
   watch: {
@@ -67,9 +99,7 @@ export default {
     this.img = this.$route.query.image
     this.getApi()
   },
-  computed: {
-
-  },
+  computed: {},
   methods: {
     base64 ({ url }) {
       return new Promise((resolve, reject) => {
@@ -102,11 +132,13 @@ export default {
         })
         .then(res => {
           that.token = res.access_token
-          that.base64({
-            url: that.img
-          }).then(res2 => {
-            that.getPlant(res.access_token, res2)
-          })
+          that
+            .base64({
+              url: that.img
+            })
+            .then(res2 => {
+              that.getPlant(res.access_token, res2)
+            })
         })
     },
     async getPlant (token, url) {
@@ -119,8 +151,7 @@ export default {
       const that = this
       wx.request({
         url:
-            'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' +
-            param2,
+          'https://aip.baidubce.com/rest/2.0/image-classify/v1/plant?' + param2,
         data: { image: url },
         header: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -139,18 +170,25 @@ export default {
     },
     showFavor () {
       if (this.isFavor) {
-        this.delFavor({name: this.plant.name})
-        this.updateList({name: this.plant.name, isFavor: false})
-        wx.showToast({title: '取消收藏', icon: 'none'})
+        this.delFavor({ name: this.plant.name })
+        this.updateList({ name: this.plant.name, isFavor: false })
+        wx.showToast({ title: '取消收藏', icon: 'none' })
       } else {
-        this.addFavor({name: this.plant.name, city: this.$store.state.city, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase})
-        this.updateList({name: this.plant.name, isFavor: true})
-        wx.showToast({title: '收藏成功', icon: 'none'})
+        this.addFavor({
+          name: this.plant.name,
+          city: this.$store.state.city,
+          description: this.plantDes.description,
+          image: this.plantDes.image_url
+            ? this.plantDes.image_url
+            : this.imgBase
+        })
+        this.updateList({ name: this.plant.name, isFavor: true })
+        wx.showToast({ title: '收藏成功', icon: 'none' })
       }
       this.isFavor = !this.isFavor
     },
     async isRepeat (v) {
-    //   await this.judgeAll(v)
+      //   await this.judgeAll(v)
       wx.cloud
         .callFunction({
           name: 'plantName',
@@ -164,8 +202,42 @@ export default {
           console.log(res.result.data, res.result.data.length)
           if (res.result.data.length === 0 && this.plant.name !== '非植物') {
             console.log(this.$store.state.province, 'sheng')
-            this.addList({name: this.plant.name, city: this.$store.state.city, province: this.$store.state.province, description: this.plantDes.description, image: this.plantDes.image_url ? this.plantDes.image_url : this.imgBase, isFavor: false})
-            console.log(this.plant.name, this.$store.state.city, this.plantDes.description, this.plantDes.image_url)
+            this.addList({
+              name: this.plant.name,
+              city: this.$store.state.city,
+              province: this.$store.state.province,
+              description: this.plantDes.description,
+              image: this.plantDes.image_url
+                ? this.plantDes.image_url
+                : this.imgBase,
+              isFavor: false
+            })
+            wx.cloud
+              .callFunction({
+                name: 'area',
+                data: {
+                  name: this.$store.state.province
+                }
+              })
+              .then(res => {
+                console.log(res.result.data, 'res')
+                res.result.data[0].value.push(this.plant.name)
+                this.areaList = res.result.data[0].value
+                this.addAreaList({
+                  name: this.$store.state.province,
+                  value: this.areaList
+                })
+              })
+            console.log(this.areaList, 'arrr')
+
+            console.log(
+              this,
+              this.addAreaList,
+              this.plant.name,
+              this.$store.state.city,
+              this.plantDes.description,
+              this.plantDes.image_url
+            )
           } else if (this.plant.name !== '非植物') {
             this.isFavor = res.result.data[0].isFavor
           }
@@ -191,28 +263,46 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.content{
-    text-indent:2em;
-    padding:40rpx;
-    text-align: left;
+.main {
+  background: #81817b;
+  text-align: center;
+  height: 1200rpx;
+}
+.content {
+  height: 260rpx;
+  overflow: auto;
+  padding-right:5rpx;
 }
 .plant {
-  width: 200rpx;
-  height: 200rpx;
+  width: 400rpx;
+  height: 400rpx;
+  border-radius: 50rpx;
+  margin-bottom: 20rpx;
+  border:1px solid white;
+}
+.plant2 {
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 25rpx;
+  margin-top: 10rpx;
+}
+.search {
+  background: #303030c4;
+  height: 440rpx;
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 120rpx;
+  border:1px solid white;
 }
 .icon {
   width: 50rpx;
   height: 50rpx;
+  position: relative;
+  right:-60rpx;
 }
 .other-plant {
   li {
-    width: 100rpx;
-    margin: 20rpx 300rpx 0 100rpx;
-  }
-  .img {
-    width: 150rpx;
-    height: 150rpx;
-    border-radius: 40rpx;
+    margin-right: 40rpx;
   }
 }
 </style>

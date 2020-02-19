@@ -6,25 +6,22 @@ export const ADDAREA_LIST = {
     }
   },
   methods: {
-    addAreaList ({ province = '', plantName = '' }) {
+    addAreaList ({ name = '', value = '' }) {
       wx.cloud
         .callFunction({
           name: 'addArea',
           data: {
-            province: province,
-            plantName: plantName
+            name: name,
+            value: value
           }
         })
         .then(res => {
-        //   console.log(res.result.data, province, 'province,res')
-        //   this.hasMore = !(res.result.data.length < this.pageSize)
-        //   this.plantList.push(...res.result.data)
-        //   this.nodata = this.$util.switchNodata(this.plantList)
+          console.log('add province')
         })
     },
     loadMore () {
       if (this.hasMore) {
-        this.addAreaList({ province: this.province, plantName: this.plantName })
+        this.addAreaList({ name: this.name, value: this.value })
       }
     }
   }
