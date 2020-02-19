@@ -35,8 +35,9 @@
           </a>
         </header>
         <div v-if="headerTab === 1">
-          <div style="height:1020rpx"> <img :src="imgBack" class="back" />
-          <div>
+          <div style="height:1020rpx" class="block">
+               <img :src="imgBack" class="back" />
+          <div class="text-align-center" style="margin-top:-50%">
             <img :src="img" class="img-plant" @click="open" />
           </div>
         </div>
@@ -52,16 +53,16 @@
 </template>
 <script>
 import filmList from '@/components/film_list'
-import { FILM_LIST, PLANT_LIST } from '@/mixin'
+import { PLANT_LIST } from '@/mixin'
 export default {
-  mixins: [FILM_LIST, PLANT_LIST],
+  mixins: [PLANT_LIST],
   components: {
     filmList
   },
   data () {
     return {
       headerTab: 1,
-      img: require('@/assets/images/icon/camera.png'),
+      img: require('@/assets/images/icon/camera2.png'),
       imgBack: require('@/assets/images/timg.jpg'),
       filePaths: '',
       cityName: '', // 接口获得的当前地理位置
@@ -167,11 +168,9 @@ $color-blue: #55b1e8;
     }
   }
   .img-plant {
-    width: 155rpx;
-    height: 155rpx;
-    position: absolute;
-    bottom: 80rpx;
-    left: 320rpx;
+    width: 200rpx;
+    height: 200rpx;
+    // border-radius: 100rpx;
   }
     .back{
     width:100%;

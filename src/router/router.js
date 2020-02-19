@@ -47,17 +47,6 @@ module.exports = [
         'van-button': '../../static/dist/button/index'
       }
     }
-  }, {
-    path: 'pages/detailWait',
-    name: 'detailWait',
-    config: {
-      navigationBarTitleText: '等我检索哦',
-      usingComponents: {
-        'van-overlay': '../static/dist/overlay/index',
-        'van-icon': '../static/dist/icon/index',
-        'van-button': '../../static/dist/button/index'
-      }
-    }
   },
   {
     path: 'pages/favorite',
@@ -78,10 +67,10 @@ module.exports = [
     }
   },
   {
-    path: 'pages/film_detail',
-    name: 'film_detail',
+    path: 'pages/plant_detail',
+    name: 'plant_detail',
     config: {
-      navigationBarTitleText: '影片详情'
+      navigationBarTitleText: '植物详情'
     }
   },
   {
@@ -89,13 +78,6 @@ module.exports = [
     name: 'web_view',
     config: {
       navigationBarTitleText: '网页'
-    }
-  },
-  {
-    path: 'pages/select_seat',
-    name: 'select_seat',
-    config: {
-      navigationBarTitleText: '选择座位'
     }
   }
 ]

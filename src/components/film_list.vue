@@ -63,7 +63,7 @@ export default {
   methods: {
     clickItem (obj) {
       this.$router.push({
-        path: 'film_detail',
+        path: 'plant_detail',
         query: {
           film: encodeURIComponent(JSON.stringify(obj))
         }
