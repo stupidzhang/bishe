@@ -32,23 +32,24 @@ export default {
     mpvueEcharts
   },
   onLoad () {
-    this.prov = this.$route.query.sear
+    // this.prov = this.$route.query.sear
   },
   methods: {
 
     test () {
       console.log(this.$store.state.provList, 'prov')
       this.searchPro = JSON.parse(JSON.stringify(this.$store.state.provList))
+      this.prov = JSON.parse(JSON.stringify(this.$store.state.provList))
       console.log(this.searchPro, '---')
-      this.$store.state.provList.map(item => {
+      this.prov.map(item => {
         item.value = item.value.length
       })
-      var dataList = this.$store.state.provList
+      var dataList = this.prov
       console.log(dataList, 'test11')
       var option = {
         title: {
           show: true,
-          text: '注：只依照定位来统计',
+          text: '注：只依照定位来统计区域',
           x: 'center',
           y: 'bottom',
           padding: 5,
