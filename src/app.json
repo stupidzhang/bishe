@@ -32,7 +32,9 @@
     "van-grid-item": "../static/dist/grid-item/index",
     "van-overlay":"../static/dist/overlay/index",
     "van-icon": "../static/dist/icon/index",
-    "van-rate": "../static/dist/rate/index"
+    "van-rate": "../static/dist/rate/index",
+    "van-skeleton": "../static/dist/skeleton/index"
+
 
   },
   "permission": {

@@ -1,6 +1,7 @@
 <template>
   <div class="skeleton">
-    <skeleton selector="skeleton" bgcolor="#FFF" v-if="showSkeleton"></skeleton>
+    <!-- <skeleton selector="skeleton" bgcolor="#FFF" v-if="showSkeleton"></skeleton> -->
+    <van-skeleton v-if="showSkeleton" title avatar :row="25" />
     <div class="main">
       <div class="text-align-center padding-top100">
         <img :src="img" class="plant" />
@@ -237,8 +238,6 @@ export default {
                   })
                 }
               })
-            console.log(this.areaList, 'arrr')
-
             console.log(
               this,
               this.addAreaList,

@@ -70,7 +70,11 @@ module.exports = [
     path: 'pages/search/plant_detail',
     name: 'plant_detail',
     config: {
-      navigationBarTitleText: '植物详情'
+      navigationBarTitleText: '植物详情',
+      usingComponents: {
+
+        'van-skeleton': '../static/dist/skeleton/index'
+      }
     }
   },
   {
