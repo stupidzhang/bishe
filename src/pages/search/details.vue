@@ -55,7 +55,7 @@ import {
   PLANT_LIST,
   UPDATEPLANT_LIST,
   ADDAREA_LIST,
-  AREA_LIST
+  AREA_LIST, NEWAREA_LIST
 } from '@/mixin'
 import Overlay from '../../components/popup'
 import skeleton from '../../components/skeleton'
@@ -67,7 +67,7 @@ export default {
     PLANT_LIST,
     UPDATEPLANT_LIST,
     ADDAREA_LIST,
-    AREA_LIST
+    AREA_LIST, NEWAREA_LIST
   ],
   components: { skeleton, Overlay },
   data () {
@@ -221,12 +221,21 @@ export default {
               })
               .then(res => {
                 console.log(res.result.data, 'res')
-                res.result.data[0].value.push(this.plant.name)
-                this.areaList = res.result.data[0].value
-                this.addAreaList({
-                  name: this.$store.state.province,
-                  value: this.areaList
-                })
+                if (res.result.data.length !== 0) {
+                  res.result.data[0].value.push(this.plant.name)
+                  this.areaList = res.result.data[0].value
+                  this.addAreaList({
+                    name: this.$store.state.province,
+                    value: this.areaList
+                  })
+                } else {
+                  console.log('新的省份')
+                  this.areaList.push(this.plant.name)
+                  this.newAreaList({
+                    name: this.$store.state.province,
+                    value: this.areaList
+                  })
+                }
               })
             console.log(this.areaList, 'arrr')
 
