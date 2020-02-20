@@ -5,9 +5,14 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
-    return await db.collection('area').where({
-      name: event.name
-    }).get()
+    if (event.name) {
+      return await db.collection('area').where({
+        name: event.name
+      }).get()
+    } else {
+      return await db.collection('area').where({
+      }).get()
+    }
   } catch (e) {
     console.error(e)
   }
