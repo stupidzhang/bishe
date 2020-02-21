@@ -47,7 +47,7 @@ export default {
       previousMargin: '63rpx',
       nextMargin: '63rpx',
       animationData: {}, // 卡片放大动画
-      animationData2: {} // 卡片缩小动画
+      animationData2: {} // 卡片缩小动画,
     }
   },
   components: {
@@ -56,7 +56,7 @@ export default {
   watch: {
     favorList (val, oldVal) {
       this.favorList = val
-      console.log(this.favorList, 'watch')
+      console.log(this.favorList, 'watch', val, oldVal)
     }
   },
   onLoad () {
@@ -68,7 +68,7 @@ export default {
       this.delFavor({name: item.name})
       this.updateList({name: item.name, isFavor: false})
       console.log(item, index, '取消收藏')
-      this.getList({ isRefresh: true })
+      setTimeout(() => { this.getList({ isRefresh: true }) }, 800)
       console.log(this.favorList, 'favorlist')
     //   this.$router.push({
     //     path: 'favorite'

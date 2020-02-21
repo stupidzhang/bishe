@@ -1,7 +1,7 @@
 <template>
   <div class="skeleton">
-    <!-- <skeleton selector="skeleton" bgcolor="#FFF" v-if="showSkeleton"></skeleton> -->
-    <van-skeleton v-if="showSkeleton" title avatar :row="25" />
+    <skeleton selector="skeleton" bgcolor="#81817b" v-if="showSkeleton"></skeleton>
+    <!-- <van-skeleton v-if="showSkeleton" title avatar :row="25" style="background-color:#333" /> -->
     <div class="main">
       <div class="text-align-center padding-top100">
         <img :src="img" class="plant" />
@@ -98,6 +98,7 @@ export default {
   },
   onLoad () {
     this.img = this.$route.query.image
+    this.showSkeleton = true
     this.getApi()
   },
   computed: {},

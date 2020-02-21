@@ -89,13 +89,15 @@ export default {
 // 描述
 .desc {
   width: 554rpx;
-  text-overflow: ellipsis;
-  overflow: auto;
+  height:300rpx;
+    overflow: auto;
+    // white-space: nowrap;
+    // text-overflow: ellipsis;
+
   margin: 0 auto;
   color: #666666;
-  font-size: 24rpx;
-  line-height: 28rpx;
-  overflow: hidden;
+  font-size: 26rpx;
+  line-height: 30rpx;
   margin-top: 21rpx;
   text-align: justify;
 }

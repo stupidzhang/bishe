@@ -3,8 +3,8 @@
     <div v-if="prov!==[]" class="wrap" >
       <mpvue-echarts  :echarts="echarts" :onInit="initChart" />
     </div>
-    <div class="more" @click="expand">详情<img :src="img" class="icon"></div>
-    <div v-if="upfold" class="content"><ul v-for="(item,index1) in searchPro" :key="index1" class="margin-bottom20"><li>在{{item.name}}搜索了<ul v-for="(val,index) in item.value" :key="index" class="inline-block"><li class="margin-right20">{{val}}</li></ul></li></ul></div>
+    <div class="more" @click="expand">详情</div>
+    <div class="content"><ul v-for="(item,index1) in searchPro" :key="index1" class="margin-bottom20"><li>在{{item.name}}搜索了<ul v-for="(val,index) in item.value" :key="index" class="inline-block"><li class="margin-right20">{{val}}</li></ul></li></ul></div>
   </div>
 </template>
 
@@ -165,9 +165,10 @@ export default {
 }
 .content{
     position: absolute;
-    bottom:20%;
+    bottom:15%;
     left:20%;
     font-size:28rpx;
+    line-height:28rpx;
     color:gray
 }
 </style>

@@ -8,7 +8,7 @@
         >
           <a
             class="flex-align paddingX20"
-            @tap="$router.push('/pages/select_city')"
+            @tap="$router.push('/pages/search/select_city')"
           >
             {{ curCity }}
             <i class="icon-uparrow rotate180 color-999"></i>
