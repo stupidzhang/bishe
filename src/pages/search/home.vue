@@ -3,7 +3,7 @@
     <main class="fixed top0 width100" style="height: calc(100% - 2rpx)">
       <scroll-view scroll-y style="height: 100%;" @scrolltolower="loadMore">
         <header
-          class="border-bottom1 flex-align-spacebetween"
+          class="flex-align-spacebetween"
           style="height: 80rpx"
         >
           <a
@@ -13,7 +13,7 @@
             {{ curCity }}
             <i class="icon-uparrow rotate180 color-999"></i>
           </a>
-          <div class="font-size2 bold flex-align">
+          <!-- <div class="font-size2 bold flex-align">
             <p
               :class="['headerTab', { cur: headerTab === 1 }]"
               @tap="switchTab(1)"
@@ -26,53 +26,55 @@
             >
               已搜索
             </p>
-          </div>
+          </div> -->
           <a
-            class="height100 padding-left20 padding-right30 border-left1 flex-align-justify"
+            class="height100 padding-left20 padding-right30 flex-align-justify"
             @tap="$router.push('search')"
-          >
-            <i class="icon-search font-size8 bold color-blue"></i>
+          ><span class="color-bg margin-right10">可查找已搜索植物</span>
+            <i class="icon-search font-size8 bold color-green"></i>
           </a>
         </header>
-        <div v-if="headerTab === 1">
-          <div style="height:1020rpx" class="block">
-               <img :src="imgBack" class="back" />
-          <div class="text-align-center" style="margin-top:-50%">
+        <div >
+            <div class="daily-all text-align-center">
+            <div class="daily">
+                 <img :src="flower[0].imgBack" class="back" />
+            </div>
+            <div class="margin-top20 font-size6">--每日花卡--</div>
+            <div class="margin-top20 font-size2">我是{{flower[0].name}}</div>
+            <div class="margin20X font-size2">{{flower[0].word}}</div>
+            </div>
+          <div class="text-align-center margin-top40">
             <img :src="img" class="img-plant" @click="open" />
           </div>
         </div>
-        </div>
-        <film-list
+        <!-- <film-list
           v-if="headerTab === 2"
           :mainList="plantList"
           :nodata="nodata"
-        ></film-list>
+        ></film-list> -->
       </scroll-view>
     </main>
   </div>
 </template>
 <script>
-import filmList from '@/components/film_list'
-import { PLANT_LIST } from '@/mixin'
+
 export default {
-  mixins: [PLANT_LIST],
-  components: {
-    filmList
-  },
+
   data () {
     return {
-      headerTab: 1,
+    //   headerTab: 1,
       img: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/camera2.png',
-      imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/timg.jpg',
+      flower: [{imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/fenxz.jpg', name: '风信子', word: '燃生命之火,享丰富人生'}],
+
       filePaths: '',
       cityName: '', // 接口获得的当前地理位置
       province: ''
     }
   },
   onShow () {
-    if (this.headerTab === 2) {
-      this.getList({ isRefresh: true })
-    }
+    // if (this.headerTab === 2) {
+    //   this.getList({ isRefresh: true })
+    // }
   },
   computed: {
     // 更改过或者当前地理位置
@@ -123,14 +125,14 @@ export default {
         }
       })
     },
-    switchTab (v) {
-      Object.assign(this, this.$options.data())
-      this.headerTab = v
-      if (this.headerTab === 2) {
-        this.getList({ isRefresh: true })
-      } else {
-      }
-    },
+    // switchTab (v) {
+    //   Object.assign(this, this.$options.data())
+    //   this.headerTab = v
+    //   if (this.headerTab === 2) {
+    //     this.getList({ isRefresh: true })
+    //   } else {
+    //   }
+    // },
     open () {
       const that = this
       wx.chooseImage({
@@ -156,6 +158,16 @@ export default {
 <style lang="scss" scoped>
 $color-blue: #55b1e8;
 .home {
+    .daily-all{
+        border-radius: 50rpx;
+        width:86%;
+        margin-left: 7%;
+        margin-top:6%;
+        border:1px dashed #999999
+    }
+    .daily{
+         height:502rpx;
+    }
   .headerTab {
     margin: 0 20rpx;
     height: 30rpx;
@@ -175,6 +187,8 @@ $color-blue: #55b1e8;
     .back{
     width:100%;
     height:100%;
+  border-radius: 50rpx 50rpx 0 0;
+
   }
 }
 </style>

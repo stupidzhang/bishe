@@ -23,6 +23,7 @@ export default {
   onLoad () {
     Object.assign(this, this.$options.data())
     console.log(this.$options.data(), 'ass')
+    this.getList({isRefresh: true})
   },
   methods: {
     goSearch (v) {

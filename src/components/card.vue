@@ -37,7 +37,7 @@ export default {
   position: relative;
   .cancel {
     font-size: 25rpx;
-    color: #b99c6d;
+    color: #32ae57;
     float: right;
     margin-right: 40rpx;
   }
@@ -75,7 +75,7 @@ export default {
   margin: 0 auto;
   // padding-left: 130rpx;
   box-sizing: border-box;
-  color: #b99c6d;
+  color: #32ae57;
   border-bottom: 2rpx dotted #e4dcce;
   .title {
     position: relative;

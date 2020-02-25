@@ -38,6 +38,11 @@
             <!-- <i class="margin-right10 icon-like"></i>收藏 -->
           </p>
           <p class="operateBtn flex-align-justify" @click="wantBuy">
+              <img
+        class="icon margin-right10"
+        :src="shop"
+        
+      />
             <i class="margin-right10 icon-buy font-size8"></i>想买
           </p>
         </div>
@@ -59,7 +64,11 @@ export default {
   mixins: [FAVOR_LIST, ADDFAVOR_LIST, DELFAVOR_LIST, UPDATEPLANT_LIST],
   data () {
     return {
-      item: {}, icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png', iconActive: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png'
+      item: {},
+      show: false,
+      icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-white.png',
+      iconActive: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png',
+      shop: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/shop.png'
     }
   },
   onLoad () {
@@ -67,6 +76,12 @@ export default {
     console.log(this.item, this.$route)
   },
   methods: {
+    onBuyClicked () {
+      wx.showToast({title: '麻烦亲去淘宝搜搜哦~', icon: 'none'})
+    },
+    onAddCartClicked () {
+
+    },
     theGetUserInfo () {
       new Promise(resolve => {
         if (!this.$store.getters.isLogin) {

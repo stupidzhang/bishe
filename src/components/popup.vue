@@ -96,7 +96,7 @@ export default {
 
   .img {
     width: 100%;
-    border-radius: 20rpx;
+    border-radius: 20rpx 20rpx 0 0;
   }
   .icon {
     width: 40rpx;

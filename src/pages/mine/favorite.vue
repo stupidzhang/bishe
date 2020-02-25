@@ -143,13 +143,13 @@ export default {
       height: 15rpx;
       box-sizing: border-box;
       border-radius: 50%;
-      border: 2rpx solid #b99c6d;
+      border: 2rpx solid #32ae57;
       margin-right: 15rpx;
       &:last-child {
         margin-right: 0rpx;
       }
       &.active {
-        background: #b99c6d;
+        background: #32ae57;
       }
     }
   }

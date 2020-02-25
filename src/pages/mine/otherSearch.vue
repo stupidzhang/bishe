@@ -3,8 +3,10 @@
     <div v-if="prov!==[]" class="wrap" >
       <mpvue-echarts  :echarts="echarts" :onInit="initChart" />
     </div>
-    <div class="more" @click="expand">详情</div>
+    <div class="more-all bgcolor-blue">
+    <div class="more margin30X" >详情</div>
     <div class="content"><ul v-for="(item,index1) in searchPro" :key="index1" class="margin-bottom20"><li>在{{item.name}}搜索了<ul v-for="(val,index) in item.value" :key="index" class="inline-block"><li class="margin-right20">{{val}}</li></ul></li></ul></div>
+    </div>
   </div>
 </template>
 
@@ -129,14 +131,6 @@ export default {
       echarts.registerMap('china', geoJson)
       this.test()
       return chart
-    },
-    expand () {
-      this.upfold = !this.upfold
-      if (this.upfold) {
-        this.img = this.img1
-      } else {
-        this.img = this.img2
-      }
     }
   },
   computed: {
@@ -150,11 +144,17 @@ export default {
   width: 100%;
   height: 1200rpx;
 }
+.more-all{
+position: absolute;
+    bottom:15%;
+    margin-left:10%;
+    width:80%;
+    background:rgba(122, 122, 122, 0.2);
+    border-radius: 30rpx;
+}
 .more{
-    position: absolute;
-    bottom:30%;
-    left:20%;
     font-size:36rpx;
+    margin-left:5%;
 }
 .icon{
     width:50rpx;
@@ -164,11 +164,9 @@ export default {
 
 }
 .content{
-    position: absolute;
-    bottom:15%;
-    left:20%;
     font-size:28rpx;
     line-height:28rpx;
-    color:gray
+    color:gray;
+    margin-left:5%;
 }
 </style>

@@ -44,7 +44,8 @@ module.exports = [
       usingComponents: {
         'van-overlay': '../static/dist/overlay/index',
         'van-icon': '../static/dist/icon/index',
-        'van-button': '../../static/dist/button/index'
+        'van-button': '../../static/dist/button/index',
+        'van-skeleton': '../static/dist/skeleton/index'
       }
     }
   },
@@ -72,8 +73,6 @@ module.exports = [
     config: {
       navigationBarTitleText: '植物详情',
       usingComponents: {
-
-        'van-skeleton': '../static/dist/skeleton/index'
       }
     }
   },
