@@ -35,7 +35,12 @@
         </div>
       </div>
       <div class="text-align-center search" v-if="!plantDes.description">
-        <div class="font-size6 color-white margin-top100">{{ plant.name }}</div>
+        <div class="font-size6 color-white margin-top100">{{ plant.name }} <img
+        v-if="plant.name!=='非植物'"
+            class="icon-empty"
+            :src="isFavor ? iconActive : icon"
+            @click="showFavor"
+          /></div>
 
         <div class="margin-top30 color-white">抱歉，百度接口内未提供介绍</div>
       </div>
@@ -80,7 +85,7 @@ export default {
       plant: [],
       plantDes: '',
       icon:
-        'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-empty.png',
+        'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-white.png',
       iconActive:
         'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png',
       isFavor: false,
@@ -113,6 +118,7 @@ export default {
             console.log(res, 'success')
           },
           fail: res => {
+            wx.showToast({title: '该图片格式不支持，请重试', icon: 'none'})
             reject(res.errMsg)
             console.log(res.errMsg, 'fail')
           }
@@ -120,6 +126,7 @@ export default {
       })
     },
     async getApi () {
+      console.log('base64里')
       var qs = require('querystring')
       const that = this
       const param = qs.stringify({
@@ -144,6 +151,7 @@ export default {
         })
     },
     async getPlant (token, url) {
+      console.log('getplantdeurl')
       var qs = require('querystring')
       const param2 = qs.stringify({
         access_token: token,
@@ -160,13 +168,23 @@ export default {
         },
         method: 'POST',
         success: function (res) {
-          that.data1 = res.data.result
-          that.plant = that.data1[0]
-          that.data1 = that.data1.slice(1)
-          that.plantDes = res.data.result[0].baike_info
-          that.imgBase = 'data:image/png;base64,' + url
-          console.log(that.plant, that.data1, '88')
-          that.isRepeat(that.plant.name)
+          console.log(res, 'error')
+          if (!res.data.error_msg) {
+            that.data1 = res.data.result
+            that.plant = that.data1[0]
+            that.data1 = that.data1.slice(1)
+            that.plantDes = res.data.result[0].baike_info
+            that.imgBase = 'data:image/png;base64,' + url
+            console.log(that.plant, that.data1, '88')
+            that.isRepeat(that.plant.name)
+          } else {
+            wx.showToast({title: '图片格式错误，请重试！', icon: 'none'})
+            setTimeout(() => {
+              that.$router.go(-1)
+            }, 2000)
+
+            console.log(res.data.error_msg)
+          }
         }
       })
     },
@@ -179,7 +197,7 @@ export default {
         this.addFavor({
           name: this.plant.name,
           city: this.$store.state.city,
-          description: this.plantDes.description,
+          description: this.plantDes.description || '暂无详细说明',
           image: this.plantDes.image_url
             ? this.plantDes.image_url
             : this.imgBase
@@ -281,6 +299,7 @@ export default {
   height: 260rpx;
   overflow: auto;
   padding-right:5rpx;
+  text-align: left;
 }
 .plant {
   width: 400rpx;
@@ -308,6 +327,11 @@ export default {
   height: 50rpx;
   position: relative;
   right:-60rpx;
+}
+.icon-empty{
+  width: 50rpx;
+  height: 50rpx;
+vertical-align: middle;
 }
 .other-plant {
   li {

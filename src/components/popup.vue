@@ -32,7 +32,7 @@ export default {
       close: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/close.png',
       text: '我要收藏',
       more: '',
-      nodata: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/no.png'
+      nodata: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/nodata.png'
     }
   },
   onLoad () {

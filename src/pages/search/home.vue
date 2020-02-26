@@ -13,45 +13,26 @@
             {{ curCity }}
             <i class="icon-uparrow rotate180 color-999"></i>
           </a>
-          <!-- <div class="font-size2 bold flex-align">
-            <p
-              :class="['headerTab', { cur: headerTab === 1 }]"
-              @tap="switchTab(1)"
-            >
-              搜索
-            </p>
-            <p
-              :class="['headerTab', { cur: headerTab === 2 }]"
-              @tap="switchTab(2)"
-            >
-              已搜索
-            </p>
-          </div> -->
           <a
             class="height100 padding-left20 padding-right30 flex-align-justify"
             @tap="$router.push('search')"
-          ><span class="color-bg margin-right10">可查找已搜索植物</span>
+          ><span class="color-green margin-right20 opacity_5">查已搜索植物</span>
             <i class="icon-search font-size8 bold color-green"></i>
           </a>
         </header>
         <div >
             <div class="daily-all text-align-center">
             <div class="daily">
-                 <img :src="flower[0].imgBack" class="back" />
+                 <img :src="dailyFlower.imgBack" class="back" />
             </div>
-            <div class="margin-top20 font-size6">--每日花卡--</div>
-            <div class="margin-top20 font-size2">我是{{flower[0].name}}</div>
-            <div class="margin20X font-size2">{{flower[0].word}}</div>
+            <div class="margin-top20 font-size6 color-blue">--每日花卡--</div>
+            <div class="margin-top20 font-size2">我是{{dailyFlower.name}}</div>
+            <div class="margin20X font-size2">{{dailyFlower.word}}</div>
             </div>
           <div class="text-align-center margin-top40">
             <img :src="img" class="img-plant" @click="open" />
           </div>
         </div>
-        <!-- <film-list
-          v-if="headerTab === 2"
-          :mainList="plantList"
-          :nodata="nodata"
-        ></film-list> -->
       </scroll-view>
     </main>
   </div>
@@ -62,10 +43,15 @@ export default {
 
   data () {
     return {
-    //   headerTab: 1,
       img: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/camera2.png',
-      flower: [{imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/fenxz.jpg', name: '风信子', word: '燃生命之火,享丰富人生'}],
-
+      flower: [{imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/fenxz.jpg', name: '风信子', word: '燃生命之火,享丰富人生'},
+        {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/mtx.jpg', name: '满天星', word: '思念、清纯、不可或缺'},
+        {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/lmo.jpg', name: '罗密欧', word: '浓'},
+        {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/cj.jpg', name: '雏菊', word: '希望、纯洁的美以及深藏在心底的爱'},
+        {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/www.jpg', name: '勿忘我', word: '永恒的爱永远的回忆'},
+        {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/njc.jpg', name: '酢浆草', word: '璀璨的心'},
+        {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/knx.png', name: '康乃馨', word: '爱，魅力，尊敬之情'}
+      ],
       filePaths: '',
       cityName: '', // 接口获得的当前地理位置
       province: ''
@@ -77,9 +63,13 @@ export default {
     // }
   },
   computed: {
-    // 更改过或者当前地理位置
     curCity () {
       return this.$store.state.city
+    },
+    dailyFlower () {
+      var week = new Date()
+      var weekday = week.getDay()
+      return this.flower[weekday - 1]
     }
   },
   onLoad () {
@@ -125,14 +115,6 @@ export default {
         }
       })
     },
-    // switchTab (v) {
-    //   Object.assign(this, this.$options.data())
-    //   this.headerTab = v
-    //   if (this.headerTab === 2) {
-    //     this.getList({ isRefresh: true })
-    //   } else {
-    //   }
-    // },
     open () {
       const that = this
       wx.chooseImage({

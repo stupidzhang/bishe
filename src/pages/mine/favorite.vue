@@ -31,7 +31,7 @@
       </ul>
     </div>
     </div>
-    <div v-if="favorList.length===0" class="nodata">您还没有收藏过的植物，快去收藏吧</div>
+    <div v-if="favorList.length===0" class="nodata"><div class="image-no"><img src="cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/nodata.png" class="image1"/></div>您还没有收藏过的植物，快去收藏吧</div>
   </div>
 </template>
 
@@ -47,7 +47,8 @@ export default {
       previousMargin: '63rpx',
       nextMargin: '63rpx',
       animationData: {}, // 卡片放大动画
-      animationData2: {} // 卡片缩小动画,
+      animationData2: {}, // 卡片缩小动画,
+      nodata: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/nodata.png'
     }
   },
   components: {
@@ -120,6 +121,15 @@ export default {
 .personal {
 //   background: #303030;
 }
+.image-no{
+    width:90%;
+    margin-left:5%;
+
+}
+.image1{
+    width:55%;
+    height:400rpx;
+}
 .item {
   transform: scale(0.9);
   transform-origin: 50% 50% 0px;
@@ -155,9 +165,11 @@ export default {
   }
 }
 .nodata{
-    margin-top:50%;
+    margin-top:30%;
     text-align: center;
     position: relative;
     background:white;
+    top:10rpx;
+    font-size:34rpx;
 }
 </style>

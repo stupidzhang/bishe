@@ -1,11 +1,11 @@
 <template>
   <div class="container">
-    <div v-if="prov!==[]" class="wrap" >
+    <div  class="wrap" >
       <mpvue-echarts  :echarts="echarts" :onInit="initChart" />
     </div>
-    <div class="more-all bgcolor-blue">
-    <div class="more margin30X" >详情</div>
-    <div class="content"><ul v-for="(item,index1) in searchPro" :key="index1" class="margin-bottom20"><li>在{{item.name}}搜索了<ul v-for="(val,index) in item.value" :key="index" class="inline-block"><li class="margin-right20">{{val}}</li></ul></li></ul></div>
+    <div v-if="prov.length!==0" class="more-all">
+    <div class="more margin20X" >详情</div>
+    <div class="content"><ul v-for="(item,index1) in searchPro" :key="index1" class="margin-bottom20"><li>在{{item.name}}搜索了<ul v-for="(val,index) in item.value" :key="index" class="inline-block"><li class="margin-right20 margin-top10">{{val}}</li></ul></li></ul></div>
     </div>
   </div>
 </template>
@@ -24,10 +24,7 @@ export default {
       searchPlant: [],
       prov: [],
       searchPro: [],
-      img1: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/more1.png',
-      img2: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/more2.png',
-      img: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/more2.png',
-      upfold: false
+      show: false
     }
   },
   components: {
@@ -53,7 +50,7 @@ export default {
           show: true,
           text: '注：只依照定位来统计区域',
           x: 'center',
-          y: 'bottom',
+          y: 'top:60rpx',
           padding: 5,
           textStyle: {
             fontSize: 14,
@@ -65,7 +62,7 @@ export default {
           triggerOn: 'click',
           formatter: function (e, t, n) {
             console.log(e, t, n, '??/')
-            return '在' + e.name + '你搜索了' + e.value + '个'
+            return '在' + e.name + '你搜索了' + (e.value ? e.value : '0') + '个植物'
           }
         },
         visualMap: {
@@ -130,6 +127,7 @@ export default {
       canvas.setChart(chart)
       echarts.registerMap('china', geoJson)
       this.test()
+      this.show = true
       return chart
     }
   },
@@ -144,9 +142,13 @@ export default {
   width: 100%;
   height: 1200rpx;
 }
+.text{
+    position: absolute;
+    top:5%;
+}
 .more-all{
 position: absolute;
-    bottom:15%;
+    top:65%;
     margin-left:10%;
     width:80%;
     background:rgba(122, 122, 122, 0.2);
