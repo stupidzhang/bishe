@@ -14,18 +14,9 @@
                 <span v-if="item.is3D" class="margin-left10 icon-3DIMAX itemflex-00auto"></span>
               </p>
               <p class="padding-left10 itemflex-00auto color-yellow" style="max-width: 35%">
-                <!-- <span v-if="item.city">{{item.city}}</span> -->
-                <!-- <span v-else class="font-size-4 color-666">暂无评分</span> -->
               </p>
             </div>
             <div class="margin-top20 color-999 line-ellipsis">您在{{item.city}}搜索该植物</div>
-            <!-- <div class="color-999 flex-align-spacebetween">
-              <p class="line-ellipsis" style="width: 80%">acccccccc</p>
-              <p>
-                <button  class="btn-red">购票</button>
-                <button class="btn-blue">预售</button>
-              </p>
-            </div> -->
           </div>
         </div>
         <div class="margin-top20 flex-align-spacebetween">
@@ -35,7 +26,6 @@
         :src="item.isFavor ? iconActive : icon"
         
       />{{item.isFavor?'已收藏':'收藏'}}
-            <!-- <i class="margin-right10 icon-like"></i>收藏 -->
           </p>
           <p class="operateBtn flex-align-justify" @click="wantBuy">
               <img
@@ -47,9 +37,10 @@
           </p>
         </div>
       </section>
-      <div class="bgcolor-white padding20X paddingX30 flex-align color-black">
+      <div class="bgcolor-white padding20X paddingX30 flex-align color-black font-size8">
         <!-- <i class="margin-right10 icon-egg color-blue font-size4"></i>片尾有三个彩蛋，不要错过哦~ -->
-        {{item.description}}
+        <span v-if="item.description" class="margin-top10">{{item.description}}</span>
+        <span v-else class="margin-top10">暂无详细信息</span>
       </div>
     </main>
     <!-- <footer class="fixed bottom0 left0 right0">

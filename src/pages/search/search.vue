@@ -25,6 +25,9 @@ export default {
     console.log(this.$options.data(), 'ass')
     this.getList({isRefresh: true})
   },
+  onShow () {
+    this.getList({ isRefresh: true })
+  },
   methods: {
     goSearch (v) {
       console.log(v, 'key')

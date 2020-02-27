@@ -5,6 +5,12 @@
     <div class="main">
       <div class="text-align-center padding-top100">
         <img :src="img" class="plant" />
+        <div class="name margin-top20 font-size14 color-bg">{{ plant.name }}  <img
+         v-if="plant.name!=='非植物'"
+            class="icon-empty"
+            :src="isFavor ? iconActive : icon"
+            @click="showFavor"
+          /></div>
       </div>
       <div class="text-align-center search" v-if="plantDes.description">
         <div class="flex-align">
@@ -27,21 +33,9 @@
           >
             <li class="color-green">{{ item.name }}</li>
           </ul>
-          <img
-            class="icon"
-            :src="isFavor ? iconActive : icon"
-            @click="showFavor"
-          />
         </div>
       </div>
-      <div class="text-align-center search" v-if="!plantDes.description">
-        <div class="font-size6 color-white margin-top100">{{ plant.name }} <img
-        v-if="plant.name!=='非植物'"
-            class="icon-empty"
-            :src="isFavor ? iconActive : icon"
-            @click="showFavor"
-          /></div>
-
+      <div class="text-align-center flex-align-justify  search" v-if="!plantDes.description">
         <div class="margin-top30 color-white">抱歉，百度接口内未提供介绍</div>
       </div>
       <Overlay
@@ -319,7 +313,7 @@ export default {
   height: 440rpx;
   width: 80%;
   margin-left: 10%;
-  margin-top: 120rpx;
+  margin-top: 60rpx;
   border:1px solid white;
 }
 .icon {
