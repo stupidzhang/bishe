@@ -10,18 +10,19 @@ export const DELFAVOR_LIST = {
   },
   methods: {
 
-    delFavor ({ name = '' }) {
+    delFavor ({ name = '', openId = '' }) {
       wx.cloud
         .callFunction({
           name: 'delFavor',
           data: {
-            name: name
+            name: name,
+            openId: openId
           }
         })
     },
     loadMore () {
       if (this.hasMore) {
-        this.delFavor({name: this.name})
+        this.delFavor({openId: this.openId, name: this.name})
       }
     }
   }

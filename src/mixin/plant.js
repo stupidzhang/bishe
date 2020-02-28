@@ -2,7 +2,6 @@ export const PLANT_LIST = {
   data () {
     return {
       plantList: [],
-      judge: true,
       nodata: false,
       pageNo: 1,
       pageSize: 6,
@@ -10,7 +9,7 @@ export const PLANT_LIST = {
     }
   },
   methods: {
-    getList ({ isRefresh, isShow, keyWord = '', type = '' }) {
+    getList ({ isRefresh, isShow, keyWord = '', openId = '' }) {
       wx.showLoading({
         title: '加载中'
       })
@@ -24,6 +23,7 @@ export const PLANT_LIST = {
         .callFunction({
           name: 'plantName',
           data: {
+            openId: openId,
             keyWord: keyWord,
             pageNo: this.pageNo,
             pageSize: this.pageSize
@@ -39,7 +39,7 @@ export const PLANT_LIST = {
     },
     loadMore () {
       if (this.hasMore) {
-        this.getList({ isRefresh: false, keyWord: this.keyWord })
+        this.getList({ isRefresh: false, keyWord: this.keyWord, openId: this.openId })
       }
     }
   }

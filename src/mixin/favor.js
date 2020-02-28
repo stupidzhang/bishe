@@ -9,7 +9,7 @@ export const FAVOR_LIST = {
     }
   },
   methods: {
-    getList ({ isRefresh, isShow, keyWord = '' }) {
+    getList ({ isRefresh, isShow, keyWord = '', openId = '' }) {
       wx.showLoading({
         title: '加载中'
       })
@@ -23,6 +23,7 @@ export const FAVOR_LIST = {
         .callFunction({
           name: 'favor',
           data: {
+            openId: openId,
             keyWord: keyWord
             // pageNo: this.pageNo,
             // pageSize: this.pageSize

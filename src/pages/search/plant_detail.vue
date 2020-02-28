@@ -92,17 +92,18 @@ export default {
       console.log(this.item.isFavor, '收藏')
       if (this.item.isFavor) {
         this.item.isFavor = false
-        this.delFavor({name: this.item.name})
-        this.updateList({name: this.item.name, isFavor: false})
+        this.delFavor({openId: this.$store.state.openId, name: this.item.name})
+        this.updateList({openId: this.$store.state.openId, name: this.item.name, isFavor: false})
       } else {
         this.item.isFavor = true
         this.addFavor({
+          openId: this.$store.state.openId,
           name: this.item.name,
           city: this.item.city,
           description: this.item.description,
           image: this.item.image
         })
-        this.updateList({name: this.item.name, isFavor: true})
+        this.updateList({openId: this.$store.state.openId, name: this.item.name, isFavor: true})
       }
     },
     wantBuy () {

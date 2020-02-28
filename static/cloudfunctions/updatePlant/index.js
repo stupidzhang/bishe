@@ -6,7 +6,8 @@ exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
     return await db.collection('plantName').where({
-      name: event.name
+      name: event.name,
+      openId: event.openId
     })
       .update({
         data: {

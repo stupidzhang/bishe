@@ -6,11 +6,12 @@ export const NEWAREA_LIST = {
     }
   },
   methods: {
-    newAreaList ({ name = '', value = '' }) {
+    newAreaList ({ openId = '', name = '', value = '' }) {
       wx.cloud
         .callFunction({
           name: 'newArea',
           data: {
+            openId: openId,
             name: name,
             value: value
           }
@@ -21,7 +22,7 @@ export const NEWAREA_LIST = {
     },
     loadMore () {
       if (this.hasMore) {
-        this.newAreaList({ name: this.name, value: this.value })
+        this.newAreaList({ openId: this.openId, name: this.name, value: this.value })
       }
     }
   }

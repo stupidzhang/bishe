@@ -6,11 +6,12 @@ export const UPDATEPLANT_LIST = {
     }
   },
   methods: {
-    updateList ({name = '', isFavor}) {
+    updateList ({openId = '', name = '', isFavor}) {
       wx.cloud
         .callFunction({
           name: 'updatePlant',
           data: {
+            openId: openId,
             name: name,
             isFavor: isFavor
           }
@@ -18,7 +19,7 @@ export const UPDATEPLANT_LIST = {
     },
     loadMore () {
       if (this.hasMore) {
-        this.updateList({name: '', isFavor: this.isFavor})
+        this.updateList({openId: this.openId, name: this.name, isFavor: this.isFavor})
       }
     }
   }

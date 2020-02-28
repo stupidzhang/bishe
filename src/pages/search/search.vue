@@ -26,12 +26,12 @@ export default {
     this.getList({isRefresh: true})
   },
   onShow () {
-    this.getList({ isRefresh: true })
+    this.getList({ isRefresh: true, openId: this.$store.state.openId })
   },
   methods: {
     goSearch (v) {
       console.log(v, 'key')
-      this.getList({isRefresh: true, keyWord: v})
+      this.getList({isRefresh: true, keyWord: v, openId: this.$store.state.openId})
     }
   }
 }

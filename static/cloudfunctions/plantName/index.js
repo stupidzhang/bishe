@@ -9,7 +9,8 @@ exports.main = async (event, context) => {
       name: db.RegExp({
         regexp: event.keyWord || '.',
         options: 'i'
-      })
+      }),
+      openId: event.openId
     }).skip((event.pageNo - 1) * event.pageSize).get()
   } catch (e) {
     console.error(e)

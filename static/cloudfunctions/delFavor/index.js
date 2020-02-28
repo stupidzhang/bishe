@@ -6,7 +6,8 @@ exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
     return await db.collection('favor').where({
-      name: event.name
+      name: event.name,
+      openId: event.openId
     }).remove()
   } catch (e) {
     console.error(e)

@@ -9,7 +9,7 @@ export const ADDFAVOR_LIST = {
     }
   },
   methods: {
-    addFavor ({ name = '', city = '', description = '', image = '' }) {
+    addFavor ({ openId = '', name = '', city = '', description = '', image = '' }) {
     //   wx.showLoading({
     //     title: '加载中'
     //   })
@@ -17,6 +17,7 @@ export const ADDFAVOR_LIST = {
         .callFunction({
           name: 'addFavor',
           data: {
+            openId: openId,
             name: name,
             city: city,
             description: description,
@@ -26,7 +27,7 @@ export const ADDFAVOR_LIST = {
     },
     loadMore () {
       if (this.hasMore) {
-        this.addFavor({name: this.name, city: this.city, description: this.description, image: this.image})
+        this.addFavor({openId: this.openId, name: this.name, city: this.city, description: this.description, image: this.image})
       }
     }
   }

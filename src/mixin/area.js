@@ -5,11 +5,12 @@ export const AREA_LIST = {
     }
   },
   methods: {
-    getAreaList () {
+    getAreaList ({openId = ''}) {
       wx.cloud
         .callFunction({
           name: 'area',
           data: {
+            openId: openId
           }
         })
         .then(res => {
@@ -20,7 +21,7 @@ export const AREA_LIST = {
     },
     loadMore () {
       if (this.hasMore) {
-        this.getAreaList()
+        this.getAreaList({openId: this.openId})
       }
     }
   }

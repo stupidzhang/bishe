@@ -61,15 +61,15 @@ export default {
     }
   },
   onLoad () {
-    this.getList({ isRefresh: true })
+    this.getList({ isRefresh: true, openId: this.$store.state.openId })
     console.log(this.favorList, 'favorList')
   },
   methods: {
     cancel (item, index) {
-      this.delFavor({name: item.name})
-      this.updateList({name: item.name, isFavor: false})
+      this.delFavor({openId: this.$store.state.openId, name: item.name})
+      this.updateList({openId: this.$store.state.openId, name: item.name, isFavor: false})
       console.log(item, index, '取消收藏')
-      setTimeout(() => { this.getList({ isRefresh: true }) }, 800)
+      setTimeout(() => { this.getList({ isRefresh: true, openId: this.$store.state.openId }) }, 1000)
       console.log(this.favorList, 'favorlist')
     //   this.$router.push({
     //     path: 'favorite'

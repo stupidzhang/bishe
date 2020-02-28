@@ -72,6 +72,7 @@ export default {
   components: { skeleton, Overlay },
   data () {
     return {
+
       img: '',
       token: '',
       imgBase: '',
@@ -99,6 +100,7 @@ export default {
     this.img = this.$route.query.image
     this.showSkeleton = true
     this.getApi()
+    console.log(this.$store.state.openId)
   },
   computed: {},
   methods: {
@@ -184,11 +186,12 @@ export default {
     },
     showFavor () {
       if (this.isFavor) {
-        this.delFavor({ name: this.plant.name })
+        this.delFavor({ openId: this.$store.state.openId, name: this.plant.name })
         this.updateList({ name: this.plant.name, isFavor: false })
         wx.showToast({ title: '取消收藏', icon: 'none' })
       } else {
         this.addFavor({
+          openId: this.$store.state.openId,
           name: this.plant.name,
           city: this.$store.state.city,
           description: this.plantDes.description || '暂无详细说明',
@@ -196,7 +199,7 @@ export default {
             ? this.plantDes.image_url
             : this.imgBase
         })
-        this.updateList({ name: this.plant.name, isFavor: true })
+        this.updateList({ openId: this.$store.state.openId, name: this.plant.name, isFavor: true })
         wx.showToast({ title: '收藏成功', icon: 'none' })
       }
       this.isFavor = !this.isFavor
@@ -207,6 +210,7 @@ export default {
         .callFunction({
           name: 'plantName',
           data: {
+            openId: this.$store.state.openId,
             keyWord: v,
             pageNo: this.pageNo,
             pageSize: this.pageSize
@@ -217,6 +221,7 @@ export default {
           if (res.result.data.length === 0 && this.plant.name !== '非植物') {
             console.log(this.$store.state.province, 'sheng')
             this.addList({
+              openId: this.$store.state.openId,
               name: this.plant.name,
               city: this.$store.state.city,
               province: this.$store.state.province,
@@ -230,6 +235,7 @@ export default {
               .callFunction({
                 name: 'area',
                 data: {
+                  openId: this.$store.state.openId,
                   name: this.$store.state.province
                 }
               })
@@ -239,6 +245,7 @@ export default {
                   res.result.data[0].value.push(this.plant.name)
                   this.areaList = res.result.data[0].value
                   this.addAreaList({
+                    openId: this.$store.state.openId,
                     name: this.$store.state.province,
                     value: this.areaList
                   })
@@ -246,6 +253,7 @@ export default {
                   console.log('新的省份')
                   this.areaList.push(this.plant.name)
                   this.newAreaList({
+                    openId: this.$store.state.openId,
                     name: this.$store.state.province,
                     value: this.areaList
                   })

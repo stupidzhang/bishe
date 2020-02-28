@@ -7,6 +7,7 @@ exports.main = async (event, context) => {
   try {
     return await db.collection('plantName').add({
       data: {
+        openId: event.openId,
         name: event.name,
         city: event.city,
         province: event.province,

@@ -7,10 +7,12 @@ exports.main = async (event, context) => {
   try {
     if (event.name) {
       return await db.collection('area').where({
-        name: event.name
+        name: event.name,
+        openId: event.openId
       }).get()
     } else {
       return await db.collection('area').where({
+        openId: event.openId
       }).get()
     }
   } catch (e) {

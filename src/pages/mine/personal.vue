@@ -90,8 +90,12 @@ export default {
   onLoad () {
     wx.cloud
       .callFunction({
-        name: 'area'
+        name: 'area',
+        data: {
+          openId: this.$store.state.openId
+        }
       })
+
       .then(res => {
         console.log(res.result.data, 'res')
         this.$store.commit(this.$types.SET_PROVLIST, res.result.data)
