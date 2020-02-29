@@ -5,13 +5,23 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   console.log(event, context, 'eve')
   try {
-    return await db.collection('plantName').where({
-      name: db.RegExp({
-        regexp: event.keyWord || '.',
-        options: 'i'
-      }),
-      openId: event.openId
-    }).skip((event.pageNo - 1) * event.pageSize).get()
+    console.log(event, 'youchaun')
+    if (event.openId) {
+      return await db.collection('plantName').where({
+        name: db.RegExp({
+          regexp: event.keyWord || '.',
+          options: 'i'
+        }),
+        openId: event.openId
+      }).skip((event.pageNo - 1) * event.pageSize).get()
+    } else {
+      return await db.collection('plantName').where({
+        name: db.RegExp({
+          regexp: event.keyWord || '.',
+          options: 'i'
+        })
+      }).skip((event.pageNo - 1) * event.pageSize).get()
+    }
   } catch (e) {
     console.error(e)
   }

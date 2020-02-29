@@ -64,7 +64,14 @@ module.exports = [
     path: 'pages/mine/otherSearch',
     name: 'otherSearch',
     config: {
-      navigationBarTitleText: '看看别人'
+      navigationBarTitleText: '我的搜索区域'
+    }
+  },
+  {
+    path: 'pages/mine/mostSearch',
+    name: 'mostSearch',
+    config: {
+      navigationBarTitleText: '热度最高'
     }
   },
   {

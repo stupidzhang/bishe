@@ -51,9 +51,6 @@
 
 <script>
 import { getUserInfo } from '@/utils/business'
-// import icon1 from 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/earth.png'
-// import icon2 from 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/heart-active.png'
-// import icon3 from 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/star.png'
 export default {
   data () {
     return {
@@ -65,12 +62,12 @@ export default {
         {
           name: '我搜索的区域',
           icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/earth.png'
+        },
+
+        {
+          name: '最热植物',
+          icon: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/hot.png'
         }
-        // ,
-        // {
-        //   name: '给我评分',
-        //   icon: icon3
-        // }
       ],
       token: '',
       imgBase: '',
@@ -112,12 +109,16 @@ export default {
         this.$router.push({
           path: 'favorite'
         })
-      } else {
+      } else if (index === 1) {
         this.$router.push({
           path: 'otherSearch',
           query: {
             sear: this.prov
           }
+        })
+      } else {
+        this.$router.push({
+          path: 'mostSearch'
         })
       }
     },
@@ -148,17 +149,5 @@ export default {
   font-size: 160rpx;
   border: 2rpx solid #fff;
 }
-.myperson {
-  border-bottom: 1rpx solid #e2e2e2;
-  height: 80rpx;
-  line-height: 80rpx;
-  margin-left: 20rpx;
-}
-.icon {
-  height: 50rpx;
-  width: 50rpx;
-  margin-right: 20rpx;
-  float: right;
-  margin-top: 10rpx;
-}
+
 </style>

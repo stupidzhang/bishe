@@ -23,7 +23,7 @@ export default {
   onLoad () {
     Object.assign(this, this.$options.data())
     console.log(this.$options.data(), 'ass')
-    this.getList({isRefresh: true})
+    // this.getList({isRefresh: true, openId: '11'})
   },
   onShow () {
     this.getList({ isRefresh: true, openId: this.$store.state.openId })

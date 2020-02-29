@@ -7,6 +7,7 @@ import { UPDATEPLANT_LIST } from './updatePlant'
 import { AREA_LIST } from './area'
 import { ADDAREA_LIST } from './addArea'
 import { NEWAREA_LIST } from './newArea'
+import { MOST_LIST } from './mostSearch'
 
 export {
   PLANT_LIST,
@@ -16,5 +17,5 @@ export {
   ADDPLANT_LIST,
   UPDATEPLANT_LIST,
   AREA_LIST,
-  ADDAREA_LIST, NEWAREA_LIST
+  ADDAREA_LIST, NEWAREA_LIST, MOST_LIST
 }

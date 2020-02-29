@@ -57,7 +57,8 @@ export default {
         .callFunction({
           name: 'favor',
           data: {
-            keyWord: this.data.name
+            keyWord: this.data.name,
+            openId: this.$store.state.openId
           }
         })
         .then(res => {
@@ -65,6 +66,7 @@ export default {
           if (res.result.data.length === 0) {
             if (this.data.baike_info) {
               this.addFavor({
+                openId: this.$store.state.openId,
                 name: this.data.name,
                 city: this.$store.state.city,
                 description: this.data.baike_info.description,
@@ -72,6 +74,7 @@ export default {
               })
             } else {
               this.addFavor({
+                openId: this.$store.state.openId,
                 name: this.data.name,
                 city: this.$store.state.city,
                 description: '暂无详细介绍',
