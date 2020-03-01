@@ -64,7 +64,17 @@ module.exports = [
     path: 'pages/mine/otherSearch',
     name: 'otherSearch',
     config: {
-      navigationBarTitleText: '我的搜索区域'
+      navigationBarTitleText: '我的搜索区域',
+      usingComponents: {
+        'van-tabs': '../../static/dist/tabs/index',
+        'van-tab': '../../static/dist/tab/index'
+      }
+    }
+  }, {
+    path: 'pages/mine/allSearch',
+    name: 'allSearch',
+    config: {
+      navigationBarTitleText: '大家搜索区域'
     }
   },
   {

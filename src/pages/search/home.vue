@@ -69,6 +69,10 @@ export default {
     dailyFlower () {
       var week = new Date()
       var weekday = week.getDay()
+      console.log(weekday, 'wd')
+      if (weekday === 0) {
+        return this.flower[6]
+      }
       return this.flower[weekday - 1]
     }
   },

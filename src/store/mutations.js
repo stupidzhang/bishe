@@ -22,6 +22,9 @@ const mutations = {
   },
   [types.SET_PROVLIST] (state, v) {
     state.provList = v
+  },
+  [types.SET_PROVLISTALL] (state, v) {
+    state.provListAll = v
   }
 }
 

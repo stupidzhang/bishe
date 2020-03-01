@@ -1,5 +1,5 @@
 <template>
-  <div v-if="picList.length!==0">
+  <div >
     <section class="margin-top50">
        <div class="font-size20 text-align-center">搜索最热榜单</div>
     </section>
@@ -7,10 +7,10 @@
         <div class="content bgcolor-bg margin-top30">
            
                 <ul>
-                    <li v-for="(item,index) in mostList" :key="index"  class="marginX20 margin20X font-size4 color-gray ">
-                       <div><img :src="picList[index]" class="picture"/></div>
+                    <li v-for="(item,index) in mostList" :key="index" @click="showImg(item,index)" class="marginX20 margin20X font-size4 color-gray all">
+                       <div ><img :src="lastPic[index]" class="picture"/></div>
                     <span class="name">{{item._id}}</span>
-                    <span class="count">搜索{{item.count}}次</span>
+                    <span class="count color-blue">搜索{{item.count}}次</span>
                    
                    </li></ul>
          
@@ -20,21 +20,24 @@
 </template>
 
 <script>
-import { MOST_LIST } from '@/mixin'
+import { MOST_LIST, PLANT_LIST } from '@/mixin'
 export default {
-  mixins: [MOST_LIST],
+  mixins: [MOST_LIST, PLANT_LIST],
   data () {
     return {
       mostList: [],
       picList: [],
-      img: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/camera2.png'
+      lastPic: [],
+      plant: [],
+      show: false
     }
   },
   computed: {
 
   },
   onLoad () {
-    console.log(this.mostList, 'mm')
+    this.picList.length = 0
+    console.log(this.picList, 'pccc')
     wx.cloud
       .callFunction({
         name: 'most'
@@ -48,40 +51,56 @@ export default {
         } else {
           this.mostList.push(...res.result.list)
         }
-
         this.showPic()
       })
   },
   methods: {
     showPic () {
-      console.log('123')
-      this.mostList.forEach(item => {
+      console.log(this.mostList, 'mm')
+      for (var i = 0; i < this.mostList.length; i++) {
         wx.cloud
           .callFunction({
             name: 'plantName',
             data: {
-              keyWord: item._id,
+              keyWord: this.mostList[i]._id,
               pageNo: 1,
               pageSize: 6
             }
           })
           .then(res => {
-            console.log(res.result.data.length, 'res')
-            this.picList.push(res.result.data[0].image)
+            console.log(i, res.result.data, this.picList, '重要图片顺序')
+            this.picList.push(res.result.data[0])
+            console.log(res.result.data, 'res顺序')
+            this.equalPic(this.picList, this.mostList)
           })
-      })
+      }
+    },
+    equalPic (val, most) {
+      console.log(val, most, 'most')
+      for (var i = 0; i < most.length; i++) {
+        for (var j = 0; j < val.length; j++) {
+          if (most[i]._id === val[j].name) {
+            this.lastPic[i] = val[j].image
+            console.log(this.lastPic, 'lastpic')
+          }
+        }
+      }
+
+      console.log(this.lastPic, 'lllpp')
     }
+
   }
 }
 </script>
 <style scoped lang="scss">
+
 .content{
     width:86%;
     margin-left:7%;
     ul{
         width:100%;
         li{
-            width:40%;
+            width:39%;
             float:left;
             margin-left:5%;
             margin-right:5%;
@@ -89,13 +108,21 @@ export default {
     }
 }
 .picture{
-width:240rpx;
+width:100%;
 height:240rpx;
-border-radius: 50rpx;
+border-radius: 50rpx 50rpx 0 0;
+padding-bottom:20rpx;
 }
 .name{
+   padding-left: 8rpx;
 }
 .count{
+   padding:0 8rpx 20rpx 0;
 float:right
+}
+.all{
+    background:#F7F7F7;
+    border-radius: 50rpx;
+    border:1px dashed #55b1e8;
 }
 </style>

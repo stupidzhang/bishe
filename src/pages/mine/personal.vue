@@ -74,7 +74,8 @@ export default {
       test: '1',
       show: false,
       value: 4,
-      prov: []
+      prov: [],
+      prov1: []
     }
   },
   computed: {
@@ -97,6 +98,16 @@ export default {
         console.log(res.result.data, 'res')
         this.$store.commit(this.$types.SET_PROVLIST, res.result.data)
         this.prov = res.result.data
+      })
+    wx.cloud
+      .callFunction({
+        name: 'area'
+      })
+
+      .then(res => {
+        console.log(res.result.data, 'res')
+        this.$store.commit(this.$types.SET_PROVLISTALL, res.result.data)
+        this.prov1 = res.result.data
       })
   },
   methods: {

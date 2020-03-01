@@ -5,7 +5,9 @@ const db = cloud.database()
 const $ = db.command.aggregate
 exports.main = async (event, context) => {
   try {
-    return await db.collection('plantName').aggregate().sortByCount('$name')
+    return await db.collection('plantName').aggregate()
+
+      .sortByCount('$name')
       .end()
   } catch (e) {
     console.error(e)

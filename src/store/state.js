@@ -7,6 +7,7 @@ const state = {
   city: '杭州', // 城市
   province: '初始省',
   provList: [],
+  provListAll: [],
   webViewUrl: null
 }
 

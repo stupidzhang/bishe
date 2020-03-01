@@ -22,7 +22,7 @@ export const MOST_LIST = {
           if (res.result.list.length > 6) {
             this.list = res.result.list.slice(0, 6)
             this.mostList = this.list
-          } else           {
+          } else {
             this.mostList.push(...res.result.list)
           }
           wx.hideLoading()

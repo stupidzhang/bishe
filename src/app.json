@@ -33,7 +33,9 @@
     "van-overlay":"../static/dist/overlay/index",
     "van-icon": "../static/dist/icon/index",
     "van-rate": "../static/dist/rate/index",
-    "van-skeleton": "../static/dist/skeleton/index"
+    "van-skeleton": "../static/dist/skeleton/index",
+    "van-tabs": "../static/dist/tabs/index",
+    "van-tab": "../static/dist/tab/index"
 
 
   },
