@@ -97,6 +97,7 @@ export default {
     }
   },
   onLoad () {
+    this.show = false
     this.img = this.$route.query.image
     this.showSkeleton = true
     this.getApi()
@@ -173,12 +174,23 @@ export default {
             that.imgBase = 'data:image/png;base64,' + url
             console.log(that.plant, that.data1, '88')
             that.isRepeat(that.plant.name)
-          } else {
+          } else if (res.data.error_code === 216201) {
             wx.showToast({title: '图片格式错误，请重试！', icon: 'none'})
             setTimeout(() => {
               that.$router.go(-1)
             }, 2000)
 
+            console.log(res.data.error_msg)
+          } else if (res.data.error_code === 17) {
+            wx.showToast({title: '每日可用识别量已用完！', icon: 'none'})
+            setTimeout(() => {
+              that.$router.go(-1)
+            }, 2000)
+          } else {
+            wx.showToast({title: '请联系开发者', icon: 'none'})
+            setTimeout(() => {
+              that.$router.go(-1)
+            }, 2000)
             console.log(res.data.error_msg)
           }
         }

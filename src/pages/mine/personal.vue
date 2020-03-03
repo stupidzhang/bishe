@@ -132,15 +132,15 @@ export default {
           path: 'mostSearch'
         })
       }
-    },
-    rate () {
-      this.show = true
-    },
-    change (v) {
-      console.log(v, '打分')
-      wx.showToast({title: '感谢您给我打了' + v + '分', icon: 'none'})
-      this.show = false
     }
+    // rate () {
+    //   this.show = true
+    // },
+    // change (v) {
+    //   console.log(v, '打分')
+    //   wx.showToast({title: '感谢您给我打了' + v + '分', icon: 'none'})
+    //   this.show = false
+    // }
   }
 }
 </script>

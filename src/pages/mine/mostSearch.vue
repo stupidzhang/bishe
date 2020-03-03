@@ -1,20 +1,23 @@
 <template>
-  <div >
+  <div v-if="lastPic.length === mostList.length">
     <section class="margin-top50">
-       <div class="font-size20 text-align-center">搜索最热榜单</div>
+      <div class="font-size20 text-align-center">最热排行榜单</div>
     </section>
     <section>
-        <div class="content bgcolor-bg margin-top30">
-           
-                <ul>
-                    <li v-for="(item,index) in mostList" :key="index" @click="showImg(item,index)" class="marginX20 margin20X font-size4 color-gray all">
-                       <div ><img :src="lastPic[index]" class="picture"/></div>
-                    <span class="name">{{item._id}}</span>
-                    <span class="count color-blue">搜索{{item.count}}次</span>
-                   
-                   </li></ul>
-         
-        </div>
+      <div class="content bgcolor-bg margin-top30">
+        <ul>
+          <li
+            v-for="(item, index) in mostList"
+            :key="index"
+            @click="showImg(item, index)"
+            class="marginX20 margin20X font-size4 color-gray all"
+          >
+            <div><img :src="lastPic[index]" class="picture" /></div>
+            <span class="name">{{ item._id }}</span>
+            <span class="count color-blue">搜索{{ item.count }}次</span>
+          </li>
+        </ul>
+      </div>
     </section>
   </div>
 </template>
@@ -32,9 +35,7 @@ export default {
       show: false
     }
   },
-  computed: {
-
-  },
+  computed: {},
   onLoad () {
     this.picList.length = 0
     console.log(this.picList, 'pccc')
@@ -76,7 +77,6 @@ export default {
       }
     },
     equalPic (val, most) {
-      console.log(val, most, 'most')
       for (var i = 0; i < most.length; i++) {
         for (var j = 0; j < val.length; j++) {
           if (most[i]._id === val[j].name) {
@@ -85,44 +85,40 @@ export default {
           }
         }
       }
-
-      console.log(this.lastPic, 'lllpp')
     }
-
   }
 }
 </script>
 <style scoped lang="scss">
-
-.content{
-    width:86%;
-    margin-left:7%;
-    ul{
-        width:100%;
-        li{
-            width:39%;
-            float:left;
-            margin-left:5%;
-            margin-right:5%;
-        }
+.content {
+  width: 86%;
+  margin-left: 7%;
+  ul {
+    width: 100%;
+    li {
+      width: 39%;
+      float: left;
+      margin-left: 5%;
+      margin-right: 5%;
     }
+  }
 }
-.picture{
-width:100%;
-height:240rpx;
-border-radius: 50rpx 50rpx 0 0;
-padding-bottom:20rpx;
+.picture {
+  width: 100%;
+  height: 240rpx;
+  border-radius: 50rpx 50rpx 0 0;
+  padding-bottom: 20rpx;
 }
-.name{
-   padding-left: 8rpx;
+.name {
+  padding-left: 8rpx;
 }
-.count{
-   padding:0 8rpx 20rpx 0;
-float:right
+.count {
+  padding: 0 8rpx 20rpx 0;
+  float: right;
 }
-.all{
-    background:#F7F7F7;
-    border-radius: 50rpx;
-    border:1px dashed #55b1e8;
+.all {
+  background: #f7f7f7;
+  border-radius: 50rpx;
+  border: 1px dashed #55b1e8;
 }
 </style>
