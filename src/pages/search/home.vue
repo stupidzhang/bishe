@@ -29,10 +29,11 @@
             <div class="margin-top20 font-size2">我是{{dailyFlower.name}}</div>
             <div class="margin20X font-size2">{{dailyFlower.word}}</div>
             </div>
-          <div class="text-align-center margin-top40">
+         
+        </div>
+         <div class="text-align-center camera">
             <img :src="img" class="img-plant" @click="open" />
           </div>
-        </div>
       </scroll-view>
     </main>
   </div>
@@ -90,7 +91,7 @@ export default {
           console.log(res)
           wx.request({
             url:
-              'http://api.map.baidu.com/reverse_geocoding/v3/?ak=e4KKWmaYLZLG9hTBaVMpSvxoOIAMcGe9&output=json&coordtype=wgs84ll&location=' +
+              'https://api.map.baidu.com/reverse_geocoding/v3/?ak=e4KKWmaYLZLG9hTBaVMpSvxoOIAMcGe9&output=json&coordtype=wgs84ll&location=' +
               latitude +
               ',' +
               longitude,
@@ -153,6 +154,10 @@ $color-blue: #55b1e8;
     }
     .daily{
          height:502rpx;
+    }
+    .camera{
+        position:relative;
+       top:5%;
     }
   .headerTab {
     margin: 0 20rpx;

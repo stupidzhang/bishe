@@ -117,17 +117,14 @@ export default {
   width: 100%;
   height: 1076rpx !important;
   background: #303030;
+  padding:5% 0 20% 0;
 }
 .personal {
-//   background: #303030;
+  background: #303030;
 }
-.image-no{
-    width:90%;
-    margin-left:5%;
 
-}
 .image1{
-    width:55%;
+    width:60%;
     height:400rpx;
 }
 .item {
@@ -141,8 +138,8 @@ export default {
 }
 // 指示点
 .swiper_dot_wrap {
-  position: relative;
-  top: 66rpx;
+  position: absolute;
+bottom: 2%;
   height: 15rpx;
   ul {
     float: right;
@@ -165,11 +162,14 @@ export default {
   }
 }
 .nodata{
-    margin-top:30%;
-    text-align: center;
-    position: relative;
-    background:white;
-    top:10rpx;
-    font-size:34rpx;
+
+    top: 50%;
+transform: translate(-50%,-50%);
+text-align: center;
+position: absolute;
+background: white;
+font-size: 45rpx;
+left: 50%;
+
 }
 </style>

@@ -83,36 +83,38 @@ export default {
       return this.$store.getters.isLogin
     }
   },
-  mounted () {
-  },
   onLoad () {
-    wx.cloud
-      .callFunction({
-        name: 'area',
-        data: {
-          openId: this.$store.state.openId
-        }
-      })
 
-      .then(res => {
-        console.log(res.result.data, 'res')
-        this.$store.commit(this.$types.SET_PROVLIST, res.result.data)
-        this.prov = res.result.data
-      })
-    wx.cloud
-      .callFunction({
-        name: 'area'
-      })
-
-      .then(res => {
-        console.log(res.result.data, 'res')
-        this.$store.commit(this.$types.SET_PROVLISTALL, res.result.data)
-        this.prov1 = res.result.data
-      })
   },
   methods: {
     theGetUserInfo () {
       getUserInfo()
+      setTimeout(() => { this.getArea() }, 1000)
+    },
+    getArea () {
+      wx.cloud
+        .callFunction({
+          name: 'area',
+          data: {
+            openId: this.$store.state.openId
+          }
+        })
+
+        .then(res => {
+          console.log(res.result.data, 'res')
+          this.$store.commit(this.$types.SET_PROVLIST, res.result.data)
+          this.prov = res.result.data
+        })
+      wx.cloud
+        .callFunction({
+          name: 'area'
+        })
+
+        .then(res => {
+          console.log(res.result.data, 'res')
+          this.$store.commit(this.$types.SET_PROVLISTALL, res.result.data)
+          this.prov1 = res.result.data
+        })
     },
     toPage (index) {
       console.log(index, 'dianiji')
