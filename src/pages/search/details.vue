@@ -305,7 +305,7 @@ export default {
 .main {
   background: #81817b;
   text-align: center;
-  height: 1200rpx;
+  height: 100%;
 }
 .content {
   height: 260rpx;

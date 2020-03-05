@@ -115,12 +115,13 @@ export default {
   //   margin-top: 20rpx;
   position: relative;
   width: 100%;
-  height: 1076rpx !important;
+  height: 95% !important;
   background: #303030;
   padding:5% 0 20% 0;
 }
 .personal {
   background: #303030;
+  height:100%;
 }
 
 .image1{

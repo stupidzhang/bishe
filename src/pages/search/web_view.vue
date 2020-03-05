@@ -16,6 +16,7 @@ export default {
       title: title
     })
     this.url = this.$store.state.webViewUrl
+    this.url = this.url.replace('http', 'https')
     console.log(this.url)
   }
 }
