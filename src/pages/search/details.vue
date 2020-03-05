@@ -1,9 +1,9 @@
 <template>
-  <div class="skeleton">
+  <div class="skeleton height100">
     <skeleton selector="skeleton" bgcolor="#81817b" v-if="showSkeleton"></skeleton>
     <!-- <van-skeleton v-if="showSkeleton" title avatar :row="25" style="background-color:#333" /> -->
     <div class="main">
-      <div class="text-align-center padding-top100">
+      <div class="text-align-center" style="padding-top:10%">
         <img :src="img" class="plant" />
         <div class="name margin-top20 font-size14 color-bg">{{ plant.name }}  <img
          v-if="plant.name!=='非植物'"
@@ -331,7 +331,7 @@ export default {
   height: 440rpx;
   width: 80%;
   margin-left: 10%;
-  margin-top: 60rpx;
+  margin-top: 10%;
   border:1px solid white;
 }
 .icon {

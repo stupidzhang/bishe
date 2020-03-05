@@ -44,7 +44,7 @@ export default {
   .card {
     position: absolute;
     width: 625rpx;
-    height: 1011rpx;
+    height: 90%;
     background: #fff;
     border-radius: 7rpx;
     top: 50rpx;
@@ -53,6 +53,7 @@ export default {
 /* 当前 swiper-item*/
 .active_item .card {
   opacity: 1;
+
 }
 /* banner */
 .img_wrap {

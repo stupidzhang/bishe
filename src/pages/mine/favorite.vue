@@ -31,7 +31,7 @@
       </ul>
     </div>
     </div>
-    <div v-if="favorList.length===0" class="nodata"><div class="image-no"><img src="cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/nodata.png" class="image1"/></div>您还没有收藏过的植物，快去收藏吧</div>
+    <div v-if="favorList.length===0" class="nodata"><div class="image-no"><img src="cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/nodata.png" class="image1"/><div>您还没有收藏过的植物，快去收藏吧</div></div></div>
   </div>
 </template>
 
@@ -125,17 +125,19 @@ export default {
 }
 
 .image1{
-    width:60%;
+    width:100%;
     height:400rpx;
 }
 .item {
   transform: scale(0.9);
   transform-origin: 50% 50% 0px;
   opacity: 0.3;
+  height:100%;
 }
 .active_item {
   transform: scale(1);
   opacity: 1;
+  height:100%;
 }
 // 指示点
 .swiper_dot_wrap {
@@ -162,15 +164,22 @@ bottom: 2%;
     }
   }
 }
-.nodata{
+.image-no{
+    position: absolute;
+top: 50%;
+transform: translate(-50%, -50%);
+left: 50%;
 
-    top: 50%;
-transform: translate(-50%,-50%);
-text-align: center;
-position: absolute;
+}
+.nodata{
+// left: 50%;
+//     top: 50%;
+// transform: translate(-50%,-50%);
+// text-align: center;
+// position: absolute;
 background: white;
 font-size: 45rpx;
-left: 50%;
+height: 100%;
 
 }
 </style>

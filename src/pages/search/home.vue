@@ -20,7 +20,7 @@
             <i class="icon-search font-size8 bold color-green"></i>
           </a>
         </header>
-        <div>
+        <div style="height:60%">
             <div class="daily-all text-align-center">
             <div class="daily">
                  <img :src="dailyFlower.imgBack" class="back" />
@@ -29,9 +29,9 @@
             <div class="margin-top20 font-size2">我是{{dailyFlower.name}}</div>
             <div class="margin20X font-size2">{{dailyFlower.word}}</div>
             </div>
-         
+        
         </div>
-         <div  v-if="isLogin" class="text-align-center camera">
+          <div  v-if="isLogin" class="text-align-center camera">
             <img :src="img" class="img-plant" @click="open" />
           </div>
     <section v-if="!isLogin" class="the-mask">
@@ -185,14 +185,15 @@ $color-blue: #55b1e8;
         width:86%;
         margin-left: 7%;
         margin-top:6%;
-        border:1px dashed #999999
+        border:1px dashed #999999;
+        height:100%;
     }
     .daily{
-         height:502rpx;
+         height:70%;
     }
     .camera{
         position:relative;
-        top:5%;
+        bottom:-10%;
     }
   .headerTab {
     margin: 0 20rpx;
