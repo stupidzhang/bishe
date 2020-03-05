@@ -6,7 +6,7 @@
         <open-data type="userNickName" class="margin-top20"></open-data>
       </div>
       <div v-else class="height100 flex-align-justify">
-        <div class="icon-cat default-avatar"></div>
+        <div class="icon-search default-avatar"></div>
       </div>
     </section>
     <section v-if="!isLogin" class="the-mask">
@@ -35,16 +35,6 @@
           @click="toPage(index)"
         />
       </van-grid>
-  <!-- <van-grid :column-num="1" >
-        <van-grid-item
-        v-if="!show"
-          :icon="icon3"
-          text="给我评分"
-          @click="rate"
-        />
-        <van-rate v-if="show" v-model="value" @change="change(v)"   class="text-align-center"></van-rate>
-      </van-grid>
-       -->
     </section>
   </div>
 </template>
@@ -84,12 +74,12 @@ export default {
     }
   },
   onLoad () {
-
+    this.getArea()
   },
   methods: {
     theGetUserInfo () {
       getUserInfo()
-      setTimeout(() => { this.getArea() }, 1000)
+      setTimeout(() => { this.getArea() }, 2000)
     },
     getArea () {
       wx.cloud
@@ -135,14 +125,6 @@ export default {
         })
       }
     }
-    // rate () {
-    //   this.show = true
-    // },
-    // change (v) {
-    //   console.log(v, '打分')
-    //   wx.showToast({title: '感谢您给我打了' + v + '分', icon: 'none'})
-    //   this.show = false
-    // }
   }
 }
 </script>

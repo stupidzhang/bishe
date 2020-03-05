@@ -20,7 +20,7 @@
             <i class="icon-search font-size8 bold color-green"></i>
           </a>
         </header>
-        <div >
+        <div>
             <div class="daily-all text-align-center">
             <div class="daily">
                  <img :src="dailyFlower.imgBack" class="back" />
@@ -31,15 +31,32 @@
             </div>
          
         </div>
-         <div class="text-align-center camera">
+         <div  v-if="isLogin" class="text-align-center camera">
             <img :src="img" class="img-plant" @click="open" />
           </div>
+    <section v-if="!isLogin" class="the-mask">
+      <div
+        class="fixed bottom0 left0 right0 paddingX40 bgcolor-white"
+        style="height: 20vh"
+      >
+        <p class="padding20X text-align-center color-999">请先登录</p>
+        <button
+          open-type="getUserInfo"
+          @getuserinfo="theGetUserInfo"
+          class="width100 border-radius8 color-white"
+          style="background-color: #32AE57"
+        >
+          微信快捷登录
+        </button>
+      </div>
+    </section>
       </scroll-view>
     </main>
+     
   </div>
 </template>
 <script>
-
+import { getUserInfo } from '@/utils/business'
 export default {
 
   data () {
@@ -54,8 +71,9 @@ export default {
         {imgBack: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/knx.png', name: '康乃馨', word: '爱，魅力，尊敬之情'}
       ],
       filePaths: '',
-      cityName: '', // 接口获得的当前地理位置
+      cityName: '',
       province: ''
+
     }
   },
   onShow () {
@@ -75,6 +93,9 @@ export default {
         return this.flower[6]
       }
       return this.flower[weekday - 1]
+    },
+    isLogin () {
+      return this.$store.getters.isLogin
     }
   },
   onLoad () {
@@ -120,6 +141,19 @@ export default {
         }
       })
     },
+    theGetUserInfo () {
+      new Promise(resolve => {
+        if (!this.$store.getters.isLogin) {
+          getUserInfo().then(() => {
+            resolve()
+          }, () => {
+            this.$widget.toastWarn('登录失败')
+          })
+        } else {
+          resolve()
+        }
+      })
+    },
     open () {
       const that = this
       wx.chooseImage({
@@ -140,6 +174,7 @@ export default {
       })
     }
   }
+
 }
 </script>
 <style lang="scss" scoped>
@@ -157,7 +192,7 @@ $color-blue: #55b1e8;
     }
     .camera{
         position:relative;
-       top:5%;
+        top:5%;
     }
   .headerTab {
     margin: 0 20rpx;

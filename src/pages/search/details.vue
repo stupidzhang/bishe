@@ -123,7 +123,6 @@ export default {
       })
     },
     async getApi () {
-      console.log('base64里')
       var qs = require('querystring')
       const that = this
       const param = qs.stringify({
@@ -148,7 +147,6 @@ export default {
         })
     },
     async getPlant (token, url) {
-      console.log('getplantdeurl')
       var qs = require('querystring')
       const param2 = qs.stringify({
         access_token: token,

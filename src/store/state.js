@@ -5,7 +5,7 @@ const state = {
   unionId: null, // 同一用户，对同一个微信开放平台下的不同应用，unionid是相同的
   userInfo: null, // 微信开放数据的用户信息
   city: '杭州', // 城市
-  province: '初始省',
+  province: '浙江省',
   provList: [],
   provListAll: [],
   webViewUrl: null

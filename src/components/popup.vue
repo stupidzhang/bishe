@@ -45,7 +45,7 @@ export default {
       this.$router.push({
         path: 'web_view',
         query: {
-          title: '具体'
+          title: '具体百科'
         }
       })
     },

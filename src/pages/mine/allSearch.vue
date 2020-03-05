@@ -22,7 +22,6 @@ export default {
     return {
       echarts,
       prov1: [],
-      delNum: -100,
       img: 'cloud://yun-tz1gu.7975-yun-tz1gu-1300627167/image/icon/left.png'
 
     }
@@ -49,12 +48,10 @@ export default {
           if (this.prov1[i].name === this.prov1[j].name) {
             console.log(i, j, '?=')
             this.prov1[i].value += this.prov1[j].value
-            this.delNum = j
-            // this.prov1.splice(j, 1)
+            this.prov1.splice(j, 1)
           }
         }
       }
-      this.prov1.splice(this.delNum, 1)
       var dataList = this.prov1
       console.log(dataList, 'test11')
       var option = {
@@ -111,12 +108,12 @@ export default {
           },
           itemStyle: {
             normal: {
-              borderColor: '#55b1e8',
+              borderColor: 'blue',
               areaColor: '#fff'
             },
             emphasis: {
               areaColor: '#55b1e8',
-              borderColor: '#55b1e8',
+              borderColor: '#fff',
               borderWidth: 2
             }
           }
@@ -154,8 +151,6 @@ export default {
   height: 800rpx;
 }
 .more-all{
-/* position: absolute;
-    top:65%; */
     margin-left:10%;
     width:80%;
     background:rgba(122, 122, 122, 0.2);
