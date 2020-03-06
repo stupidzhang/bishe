@@ -117,7 +117,7 @@ export default {
   width: 100%;
   height: 95% !important;
   background: #303030;
-  padding:5% 0 20% 0;
+//   padding:5% 0 20% 0;
 }
 .personal {
   background: #303030;

@@ -50,6 +50,9 @@ export default {
     top: 50rpx;
   }
 }
+.cont_wrap{
+    height:50%;
+}
 /* 当前 swiper-item*/
 .active_item .card {
   opacity: 1;
@@ -90,7 +93,7 @@ export default {
 // 描述
 .desc {
   width: 554rpx;
-  height:300rpx;
+  height:65%;
     overflow: auto;
     // white-space: nowrap;
     // text-overflow: ellipsis;
