@@ -2,6 +2,7 @@
   <div v-if="lastPic.length === mostList.length">
     <section class="margin-top50">
       <div class="font-size20 text-align-center">最热排行榜单</div>
+      <div class="text-align-center" style="color:#999999">*统计全部用户</div>
     </section>
     <section>
       <div class="content bgcolor-bg margin-top30">
