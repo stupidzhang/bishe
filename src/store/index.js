@@ -27,7 +27,7 @@ export default new Vuex.Store({
           appId: val.appId,
           openId: val.openId,
           unionId: val.unionId,
-          userInfo: val.userInfo,
+          userInfo: val.userInfo
         }
       }
     })
